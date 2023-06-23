@@ -15,18 +15,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'resumeMaker',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Login(),
+      //home: Login(),
 
-      initialRoute: '/loginPage',
+     initialRoute: '/codeVerification',
       routes: {
-       // '/': (context) => HomeScreen(),
+        '/': (context) => RegistrationPage(),
         '/loginPage': (context) => Login(),
         '/codeVerification' :(context) => codeVerification(),
-        '/registrationPage' : (context) => RegistrationPage(),
+      //  '/registrationPage' : (context) => RegistrationPage(),
       },
     );
   }

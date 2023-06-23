@@ -1,90 +1,92 @@
 import 'package:flutter/material.dart';
 
-class AnimatedRegisterButton extends StatefulWidget {
+class AnimatedButton extends StatefulWidget {
+  final double width;
+  final VoidCallback onPressed;
+  String text;
+
+   AnimatedButton({required this.width, required this.onPressed , required this.text});
+
   @override
-  _AnimatedRegisterButtonState createState() => _AnimatedRegisterButtonState();
+  _AnimatedButtonState createState() => _AnimatedButtonState();
 }
 
-class _AnimatedRegisterButtonState extends State<AnimatedRegisterButton>
+class _AnimatedButtonState extends State<AnimatedButton>
     with SingleTickerProviderStateMixin {
-  AnimationController? _animationController;
-  Animation<double>? _scaleAnimation;
-  bool _isLoading = false;
+  late AnimationController _animationController;
+  late Animation<double> _widthAnimation;
 
   @override
   void initState() {
     super.initState();
+
     _animationController = AnimationController(
+      duration: const Duration(seconds: 1),
       vsync: this,
-      duration: Duration(milliseconds: 300),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(
+
+    _widthAnimation = Tween<double>(
+      begin: widget.width,
+      end: widget.width * 0.1,
+    ).animate(
       CurvedAnimation(
-        parent: _animationController!,
-        curve: Curves.easeInOut,
+        parent: _animationController,
+        curve: Curves.easeOut,
       ),
     );
+    print(_widthAnimation.value);
   }
 
   @override
   void dispose() {
-    _animationController!.dispose();
+    _animationController.dispose();
     super.dispose();
-  }
-
-  void _startLoading() {
-    setState(() {
-      _isLoading = true;
-    });
-    _animationController!.forward();
-    // Simulate a loading delay
-    Future.delayed(Duration(seconds: 2), () {
-      _stopLoading();
-    });
-  }
-
-  void _stopLoading() {
-    setState(() {
-      _isLoading = false;
-    });
-    _animationController!.reverse();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-  animation: _animationController!,
-  builder: (BuildContext context, Widget? child) {
-    return Transform.scale(
-      scale: _scaleAnimation!.value,
-      child: FractionallySizedBox(
-        widthFactor: 0.7, // Set your desired width factor here (0.0 to 1.0)
-       // heightFactor: 0.1,
-        child: ElevatedButton(
-          onPressed: _isLoading ? null : _startLoading,
-          style: ElevatedButton.styleFrom(
-            
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
+    return GestureDetector(
+      // onTapDown: (_) => _animationController.forward(),
+      // onTapUp: (_) {
+      //   _animationController.reverse();
+      //   widget.onPressed();
+      // },
+
+      // onTapCancel: () => _animationController.reverse(),
+      onTap: () async{
+        _animationController.forward();
+      await  Future.delayed(Duration(seconds: 2));
+        _animationController.reverse();
+      },
+      child: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return 
+          _widthAnimation.value > 80 ? Container (
+            width: _widthAnimation.value ,
+            height: 50.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.0),
+                                  gradient: LinearGradient(colors: [
+                                    Color.fromRGBO(143, 148, 251, 1),
+                                    Color.fromRGBO(143, 148, 251, .6),
+                                  ]
+                                  
+                                  ),
             ),
-          ),
-          child: _isLoading
-              ? SizedBox(
-                  width: 20.0,
-                  height: 20.0,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.0,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                )
-              : Text(
-                  'Register',
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            child: Center(
+              child: Text(
+                widget.text,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
                 ),
-        ),
+              ),
+            ),
+          ) : CircularProgressIndicator();
+        },
       ),
     );
-  },
-);
   }
 }

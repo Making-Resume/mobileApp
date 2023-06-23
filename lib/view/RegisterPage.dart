@@ -168,7 +168,10 @@ class Register extends StatelessWidget {
                                   gradient: LinearGradient(colors: [
                                     Color.fromRGBO(143, 148, 251, 1),
                                     Color.fromRGBO(143, 148, 251, .6),
-                                  ])),
+                                  ]
+                                  
+                                  )
+                                  ),
                               child: Center(
                                 child: Text(
                                   "Register",
@@ -213,6 +216,7 @@ class Register extends StatelessWidget {
               ],
             ),
           ),
-        ));
+        )
+        );
   }
 }
