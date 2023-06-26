@@ -197,13 +197,13 @@ class RegistrationForm extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
-                    Center(
-                      child: AnimatedButton(
-                        text: 'Register',
-                        onPressed: () {},
-                        width: 200.0,
-                      ),
-                    )
+                    // Center(
+                    //   child: AnimatedButton(
+                    //     text: 'Register',
+                    //     onPressed: () {},
+                    //     width: 200.0,
+                    //   ),
+                    // )
                   ],
                 ),
               )

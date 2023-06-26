@@ -18,16 +18,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'resumeMaker',
       theme: ThemeData(
+      //  fontFamily: 'Roboto',
         primarySwatch: Colors.blue,
       ),
       //home: Login(),
 
-     initialRoute: '/codeVerification',
+     initialRoute: '/loginPage',
       routes: {
         '/': (context) => RegistrationPage(),
         '/loginPage': (context) => Login(),
         '/codeVerification' :(context) => codeVerification(),
-      //  '/registrationPage' : (context) => RegistrationPage(),
+        '/registrationPage' : (context) => RegistrationPage(),
       },
     );
   }

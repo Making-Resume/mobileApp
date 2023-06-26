@@ -1,6 +1,8 @@
+import 'package:any_animated_button/any_animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import '../bloc/registrationPage/button_bloc/success_bloc.dart';
 import '../utils/loginPageAnimation.dart';
 import 'widgets/custom_Button.dart';
 
@@ -28,14 +30,16 @@ class codeVerification extends StatefulWidget {
 class _codeVerificationState extends State<codeVerification> {
   String _code = "";
   String signature = "{{ app signature }}";
-
+  late final SuccessBloc successBloc;
   @override
   void initState() {
+    successBloc = SuccessBloc();
     super.initState();
   }
 
   @override
   void dispose() {
+    successBloc.close();
     SmsAutoFill().unregisterListener();
     super.dispose();
   }
@@ -145,13 +149,19 @@ class _codeVerificationState extends State<codeVerification> {
                   // ),
                   const Spacer(),
                     Center(
-                      child: AnimatedButton(
-                        text: 'Submit',
-                        onPressed: (){
+                      child: 
+                                  MinimalisticButton(
+              bloc: successBloc as AnyAnimatedButtonBloc<Object, Object, Object>?, 
+              text: 'Animated success button',
+              onTap: () => successBloc.add(TriggerAnyAnimatedButtonEvent(13)),
+),
+                      // AnimatedButton(
+                      //   text: 'Submit',
+                      //   onPressed: (){
                         
-                        },
-                        width: 200,
-                      )  
+                      //   },
+                      //   width: 200,
+                      // )  
                     )
                   // ElevatedButton(
                   //   child: const Text('Set code to 123456'),
