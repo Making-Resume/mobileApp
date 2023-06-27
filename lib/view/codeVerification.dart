@@ -1,8 +1,8 @@
-import 'package:any_animated_button/any_animated_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
-import '../bloc/registrationPage/button_bloc/success_bloc.dart';
+
 import '../utils/loginPageAnimation.dart';
 import 'widgets/custom_Button.dart';
 
@@ -30,16 +30,17 @@ class codeVerification extends StatefulWidget {
 class _codeVerificationState extends State<codeVerification> {
   String _code = "";
   String signature = "{{ app signature }}";
-  late final SuccessBloc successBloc;
-  @override
-  void initState() {
-    successBloc = SuccessBloc();
-    super.initState();
-  }
 
   @override
+  void initState() {
+ 
+    super.initState();
+  }
+ double? height = 200;
+ double? width = 200;
+  @override
   void dispose() {
-    successBloc.close();
+   
     SmsAutoFill().unregisterListener();
     super.dispose();
   }
@@ -150,19 +151,21 @@ class _codeVerificationState extends State<codeVerification> {
                   const Spacer(),
                     Center(
                       child: 
-                                  MinimalisticButton(
-              bloc: successBloc as AnyAnimatedButtonBloc<Object, Object, Object>?, 
-              text: 'Animated success button',
-              onTap: () => successBloc.add(TriggerAnyAnimatedButtonEvent(13)),
-),
-                      // AnimatedButton(
-                      //   text: 'Submit',
-                      //   onPressed: (){
-                        
-                      //   },
-                      //   width: 200,
-                      // )  
-                    )
+
+                         InkWell(
+                          onTap: (){
+                            setState(() {
+                              width = 50;
+                              height = 50;
+                            });
+                          },
+                           child: AnimatedContainer(
+                            width: width,
+                           height: height,
+                            duration: Duration(seconds: 1)),
+                           ),
+                    ),
+              
                   // ElevatedButton(
                   //   child: const Text('Set code to 123456'),
                   //   onPressed: () async {

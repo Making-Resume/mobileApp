@@ -4,12 +4,39 @@ import 'package:resumemaker/view/loginPage.dart';
 import 'package:resumemaker/view/widgets/custom_Button.dart';
 import 'package:resumemaker/view/widgets/custom_textFormField.dart';
 
+import '../models/UserAuthentication.dart';
+
 class Register extends StatefulWidget {
   @override
   State<Register> createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
+
+    UserAuthenticationRepository user = UserAuthenticationRepository();
+
+  double? width = 200.0;
+  double? height = 50.0;
+  bool? _isLoading = false;
+
+  
+  void triggerButton() async {
+    setState(() {
+      _isLoading = true;
+      width = 50;
+    });
+   await Future.delayed(Duration(seconds: 4));
+    user.Register(email: 'MohsenKashefi2016@yahooc.com')!.then((value) {
+           if(value is User){
+            Navigator.pushNamed(context, '/codeVerification');
+           }
+    },);
+
+    setState(() {
+       width = 200;
+      _isLoading = false;
+    });
+  }
   TextEditingController emailController =  TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -130,22 +157,30 @@ class _RegisterState extends State<Register> {
                   SizedBox(
                     height: 30,
                   ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     Navigator.pushNamed(context, '/codeVerification');
-                  //   },
-                  //   child: FadeAnimation(
-                  //       2,
-                  //                        Center(
-                  //       child: AnimatedButton(
-                  //         text: 'Register',
-                  //         onPressed: () {
-                  //              Navigator.pushNamed(context, '/codeVerfication');
-                  //         },
-                  //         width: 200.0,
-                  //       ),
-                  //     )
-                  //       )),
+       FadeAnimation(
+                      2,
+                      InkWell(
+                        onTap:
+                            triggerButton,
+                      
+
+                        child:  AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25.0),
+                              gradient: LinearGradient(colors: [
+                                Color.fromRGBO(143, 148, 251, 1),
+                                Color.fromRGBO(143, 148, 251, .6),
+                              ]),
+                            ),
+
+                            child: width! == 50  ? Center(child: CircularProgressIndicator(color: Colors.white,)) :Center(child: Text('Register')) ,
+                            width: width,
+                            height: height,
+
+
+                            duration: Duration(seconds: 1))
+                      ),
+                    ),
               
             
             

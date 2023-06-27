@@ -1,14 +1,10 @@
-import 'package:any_animated_button/any_animated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:resumemaker/utils/failure.dart';
+import 'package:resumemaker/models/UserAuthentication.dart';
+
 import 'package:resumemaker/utils/loginPageAnimation.dart';
 import 'package:resumemaker/view/RegisterPage.dart';
 import 'package:resumemaker/view/widgets/custom_Button.dart';
 import 'package:resumemaker/view/widgets/custom_textFormField.dart';
-
-import '../bloc/registrationPage/button_bloc/error_bloc.dart';
-import '../bloc/registrationPage/button_bloc/short_bloc.dart';
-import '../bloc/registrationPage/button_bloc/success_bloc.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,51 +14,42 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController _enamilController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
- AnimationController? animationController;
+  UserAuthenticationRepository user = UserAuthenticationRepository();
 
-  late final SuccessBloc successBloc;
-  late final SuccessBloc _success2Bloc;
-  late final ErrorBloc _errorBloc;
-  late final ShortBloc _shortBloc;
-  late final ShortBloc _enabledButton;
-  late final ShortBloc _nullWidth;
-  late final ShortBloc _infinityWidth;
-  late final ShortBloc _fixedWidth;
-
-  bool _enabled = false;
-
-
-   @override
+  double? width = 200.0;
+  double? height = 50.0;
+  bool? _isLoading = false;
+  @override
   void initState() {
-    successBloc = SuccessBloc();
-    _success2Bloc = SuccessBloc();
-    _errorBloc = ErrorBloc();
-    _shortBloc = ShortBloc();
-    _enabledButton = ShortBloc();
-    _nullWidth = ShortBloc();
-    _infinityWidth = ShortBloc();
-    _fixedWidth = ShortBloc();
-
     super.initState();
   }
 
   @override
   void dispose() {
-    successBloc.close();
-    _success2Bloc.close();
-    _errorBloc.close();
-    _shortBloc.close();
-    _enabledButton.close();
-    _nullWidth.close();
-    _infinityWidth.close();
-    _fixedWidth.close();
-
     super.dispose();
   }
+
+  void triggerButton() async {
+    setState(() {
+      _isLoading = true;
+      width = 50;
+    });
+   await Future.delayed(Duration(seconds: 4));
+    // user.Register(email: 'MohsenKashefi2016@yahooc.com')!.then((value) {
+    //        if(value is User){
+    //         Navigator.pushNamed(context, '/codeVerification');
+    //        }
+    // },);
+
+    setState(() {
+       width = 200;
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
@@ -85,8 +72,8 @@ class _LoginState extends State<Login> {
                           Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/light-1.png'))),
+                                    image: AssetImage(
+                                        'assets/images/light-1.png'))),
                           )),
                     ),
                     Positioned(
@@ -98,8 +85,8 @@ class _LoginState extends State<Login> {
                           Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/light-2.png'))),
+                                    image: AssetImage(
+                                        'assets/images/light-2.png'))),
                           )),
                     ),
                     Positioned(
@@ -164,7 +151,7 @@ class _LoginState extends State<Login> {
                                 child: customTextFormfield(
                                     controller: _enamilController,
                                     hintText: "Email or Phone number",
-      
+
                                     /// label: 'Family',
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -174,11 +161,11 @@ class _LoginState extends State<Login> {
                               ),
                               Container(
                                 height: 60,
-                             //   padding: EdgeInsets.all(8.0),
+                                //   padding: EdgeInsets.all(8.0),
                                 child: customTextFormfield(
                                     controller: _passwordController,
                                     hintText: "Password",
-      
+
                                     /// label: 'Family',
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -192,15 +179,30 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: 20,
                     ),
-
                     FadeAnimation(
-                        2,
-            MinimalisticButton(
-              bloc: successBloc as AnyAnimatedButtonBloc<Object, Object, Object>?, 
-              text: 'Animated success button',
-              onTap: () => successBloc.add(TriggerAnyAnimatedButtonEvent(13)),
-),
-                        ),
+                      2,
+                      InkWell(
+                        onTap:
+                            triggerButton,
+                      
+
+                        child:  AnimatedContainer(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25.0),
+                              gradient: LinearGradient(colors: [
+                                Color.fromRGBO(143, 148, 251, 1),
+                                Color.fromRGBO(143, 148, 251, .6),
+                              ]),
+                            ),
+
+                            child: width! == 50  ? Center(child: CircularProgressIndicator(color: Colors.white,)) :Center(child: Text('Login')) ,
+                            width: width,
+                            height: height,
+
+
+                            duration: Duration(seconds: 1))
+                      ),
+                    ),
                     SizedBox(
                       height: 25,
                     ),
@@ -208,8 +210,8 @@ class _LoginState extends State<Login> {
                         1.5,
                         Text(
                           "Forgot Password?",
-                          style:
-                              TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
+                          style: TextStyle(
+                              color: Color.fromRGBO(143, 148, 251, 1)),
                         )),
                     SizedBox(
                       height: 10,
@@ -226,7 +228,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Register",
                               style: TextStyle(
-                                fontFamily: 'Roboto',
+                                  fontFamily: 'Roboto',
                                   color: Color.fromRGBO(143, 148, 251, 1)),
                             ))),
                   ],
