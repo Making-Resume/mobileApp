@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resumemaker/utils/const/textStyle.dart';
 
 class customTextFormfield extends StatelessWidget {
   final TextEditingController? controller;
@@ -15,15 +16,26 @@ class customTextFormfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8.0),
-      child: TextField(
+    return
+    // Container(
+   //   padding: EdgeInsets.symmetric(horizontal: 2 , vertical: 2),
+     // child:
+       TextFormField(
+        controller: controller,
+        validator: validator,
+        obscureText: obscureText!,
         decoration: InputDecoration(
-            border: InputBorder.none,
+          contentPadding: EdgeInsets.zero,
+          border: InputBorder.none,
+          errorStyle: TextStyle1(color:Colors.red[400] , size: 11),
+            // border: OutlineInputBorder(
+            //   borderSide: BorderSide(),
+            // ),
+            
             hintText: hintText,
             hintStyle: TextStyle(color: Colors.grey[400])),
-      ),
-    );
+      );
+   // );
     // return Container(
     // //  padding: EdgeInsets.fromLTRB(10,2,10,2),
     //                                          padding: EdgeInsets.all(8.0),

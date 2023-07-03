@@ -1,24 +1,11 @@
-
 import 'package:flutter/material.dart';
+import 'package:resumemaker/models/ApiError.dart';
+import 'package:resumemaker/models/UserAuthentication.dart';
+import 'package:resumemaker/view/widgets/custom_AlertDialog.dart';
 import 'package:sms_autofill/sms_autofill.dart';
-
 
 import '../utils/loginPageAnimation.dart';
 import 'widgets/custom_Button.dart';
-
-// void main() => runApp(const MyApp());
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       theme: ThemeData.light(),
-//       home: const HomePage(),
-//     );
-//   }
-// }
 
 class codeVerification extends StatefulWidget {
   const codeVerification({Key? key}) : super(key: key);
@@ -30,17 +17,48 @@ class codeVerification extends StatefulWidget {
 class _codeVerificationState extends State<codeVerification> {
   String _code = "";
   String signature = "{{ app signature }}";
-
+  UserAuthenticationRepository user = UserAuthenticationRepository();
   @override
   void initState() {
- 
     super.initState();
   }
- double? height = 200;
- double? width = 200;
+
+  double? width = 200.0;
+  double? height = 50.0;
+  bool? _isLoading = false;
+
+  triggerButton({String? email}) async {
+    setState(() {
+      _isLoading = true;
+      width = 50;
+    });
+    await Future.delayed(Duration(seconds: 4));
+    await user.Register(email: email!)!.then(
+      (value) {
+        if (value is User) {
+          Navigator.pushNamed(context, '/codeVerification');
+        } else if (value is ApiError) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return RoundedAlertDialog(
+                title: 'Error',
+                message: value.message,
+              );
+            },
+          );
+        }
+      },
+    );
+
+    setState(() {
+      width = 200;
+      _isLoading = false;
+    });
+  }
+
   @override
   void dispose() {
-   
     SmsAutoFill().unregisterListener();
     super.dispose();
   }
@@ -120,52 +138,78 @@ class _codeVerificationState extends State<codeVerification> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               height: 200,
               child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                // mainAxisSize: MainAxisSize.max,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   //const PhoneFieldHint(),
                   const Spacer(),
-                  PinFieldAutoFill(
-                    decoration: BoxLooseDecoration(
-                        radius: Radius.circular(10.0),
-                        bgColorBuilder: FixedColorBuilder(
-                            Color.fromARGB(255, 255, 255, 255)),
-                        strokeColorBuilder: FixedColorBuilder(Colors.black),
-                        gapSpace: 16),
-                    currentCode: _code,
-                    onCodeSubmitted: (code) {},
-                    onCodeChanged: (code) {
-                      if (code!.length == 6) {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                      }
-                    },
+                  FadeAnimation(
+                    1.5,
+                    PinFieldAutoFill(
+
+                      decoration: BoxLooseDecoration(
+                          radius: Radius.circular(10.0),
+                          bgColorBuilder: FixedColorBuilder(
+                              Color.fromARGB(255, 255, 255, 255)),
+                          strokeColorBuilder: FixedColorBuilder(Colors.black),
+                          gapSpace: 16),
+                      //currentCode: _code,
+                      codeLength: 5,
+
+                      
+                      onCodeSubmitted: (code) {
+                        //setState(() {
+                           print(code);
+                       // });
+                       
+                      },
+                      onCodeChanged: (code) {
+                        if (code!.length == 5) {
+                        //  print(code);
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        }
+                      },
+                    ),
                   ),
                   const Spacer(),
                   // TextFieldPinAutoFill(
                   //   currentCode: _code,
                   // ),
-                  const Spacer(),
-                    Center(
-                      child: 
 
-                         InkWell(
-                          onTap: (){
-                            setState(() {
-                              width = 50;
-                              height = 50;
-                            });
-                          },
-                           child: AnimatedContainer(
-                            width: width,
-                           height: height,
-                            duration: Duration(seconds: 1)),
-                           ),
-                    ),
-              
+                  FadeAnimation(
+                    2,
+                    InkWell(
+                        onTap: () async {
+                          // if(_formKey.currentState!.validate()){
+                          await triggerButton(email: 'dsf');
+                          // }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: AnimatedContainer(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25.0),
+                                gradient: LinearGradient(colors: [
+                                  Color.fromRGBO(143, 148, 251, 1),
+                                  Color.fromRGBO(143, 148, 251, .6),
+                                ]),
+                              ),
+                              child: width! == 50
+                                  ? Center(
+                                      child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ))
+                                  : Center(child: Text('submit')),
+                              width: width,
+                              height: height,
+                              duration: Duration(seconds: 1)),
+                        )),
+                  ),
+
                   // ElevatedButton(
                   //   child: const Text('Set code to 123456'),
                   //   onPressed: () async {

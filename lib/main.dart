@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:resumemaker/view/RegisterPage.dart';
+import 'package:resumemaker/view/codeVerification2.dart';
 import 'package:resumemaker/view/loginPage.dart';
 import 'package:resumemaker/view/codeVerification.dart';
 import 'package:resumemaker/view/mainRegistration.dart';
@@ -18,17 +20,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'resumeMaker',
       theme: ThemeData(
-      //  fontFamily: 'Roboto',
+        fontFamily: 'circular',
         primarySwatch: Colors.blue,
       ),
       //home: Login(),
 
      initialRoute: '/loginPage',
       routes: {
-        '/': (context) => RegistrationPage(),
+       // '/': (context) => (),
         '/loginPage': (context) => Login(),
+        '/registerPage' : (context) => Register(),
         '/codeVerification' :(context) => codeVerification(),
         '/registrationPage' : (context) => RegistrationPage(),
+        '/codeVerification2':(context) =>  PinCodeVerificationScreen(),
       },
     );
   }

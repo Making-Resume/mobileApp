@@ -1,24 +1,46 @@
-// Event
-import 'package:equatable/equatable.dart';
 
-abstract class RegistrationEvent extends Equatable {
-  const RegistrationEvent();
+// State
+import 'package:equatable/equatable.dart';
+import 'package:resumemaker/models/UserAuthentication.dart';
+
+abstract class RegistrationState extends Equatable {
+  const RegistrationState();
 
   @override
   List<Object> get props => [];
 }
 
-class RegisterButtonPressed extends RegistrationEvent {
-  final String name;
-  final String family;
-  final String password;
+class RegistrationInitial extends RegistrationState {
 
-  const RegisterButtonPressed({
-    required this.name,
-    required this.family,
-    required this.password,
-  });
+   
+   RegistrationInitial();
 
-  @override
-  List<Object> get props => [name, family, password];
+}
+
+class RegistrationLoading extends RegistrationState {
+     double? width;
+   double? height;
+   
+  RegistrationLoading({this.width , this.height});
+}
+
+
+class RegistrationSuccess extends RegistrationState {
+  final List<User>? users;
+     double? width;
+   double? height;
+ RegistrationSuccess({this.users , this.width , this.height });
+  // @override
+  // List<Object?> get props => [users];
+
+}
+
+class RegistrationFailure extends RegistrationState {
+     double? width;
+   double? height;
+  String? error;
+  RegistrationFailure({this.error , this.height , this.width });
+  
+  //   @override
+  // List<Object?> get props => [error];
 }
