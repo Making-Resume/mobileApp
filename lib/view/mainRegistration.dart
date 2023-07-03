@@ -38,11 +38,13 @@ class RegistrationForm extends StatelessWidget {
         listener: (context, state) {
           if (state is RegistrationSuccess) {
             width = state.width;
-            show_message(message: 'Registration Successful!' , context: context );
+            show_message(message: 'Registration Successful!', context: context);
           } else if (state is RegistrationFailure) {
             width = state.width;
             // Handle registration failure
-             show_message(message: 'Registration Failed. Please try again.' , context: context );
+            show_message(
+                message: 'Registration Failed. Please try again.',
+                context: context);
           } else if (state is RegistrationLoading) {
             width = state.width;
           }
@@ -51,9 +53,8 @@ class RegistrationForm extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-          custom_header(path: 'assets/images/login.json' ,  context: context ),
-              
-              
+                custom_header(
+                    path: 'assets/images/register.json', context: context),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   child: Form(
@@ -69,14 +70,15 @@ class RegistrationForm extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color.fromRGBO(143, 148, 251, .2),
+                                        color:
+                                            Color.fromRGBO(143, 148, 251, .2),
                                         blurRadius: 20.0,
                                         offset: Offset(0, 10))
                                   ]),
                               child: Column(
                                 children: <Widget>[
                                   Container(
-                                     height: 60,
+                                    height: 55,
                                     padding: EdgeInsets.only(left: 5),
                                     decoration: BoxDecoration(
                                         border: Border(
@@ -95,7 +97,7 @@ class RegistrationForm extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    height: 60,
+                                    height: 55,
                                     padding: EdgeInsets.only(left: 5),
                                     decoration: BoxDecoration(
                                         border: Border(
@@ -142,30 +144,30 @@ class RegistrationForm extends StatelessWidget {
                             }
                             return FadeAnimation(
                               1.5,
-                             custom_Button(
+                              custom_Button(
                                   width: width,
                                   height: height,
                                   title: 'submit',
                                   onTap: state is RegistrationLoading
                                       ? null
                                       : () async {
-                                       if(_formKey.currentState!.validate()){
-                                          BlocProvider.of<RegistrationBloc>(context)
-                                              .add(
-                                            RegisterButtonPressed(
-                                              name: nameController.text,
-                                              family: familyController.text,
-                                              password: passwordController.text,
-                                            ),
-                                          );
-                                       }
-                                        }
-                                        ),
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            BlocProvider.of<RegistrationBloc>(
+                                                    context)
+                                                .add(
+                                              RegisterButtonPressed(
+                                                name: nameController.text,
+                                                family: familyController.text,
+                                                password:
+                                                    passwordController.text,
+                                              ),
+                                            );
+                                          }
+                                        }),
                             );
-                          
                           },
                         ),
-                  
                       ],
                     ),
                   ),
@@ -174,6 +176,5 @@ class RegistrationForm extends StatelessWidget {
             ),
           ),
         ));
-
   }
 }

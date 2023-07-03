@@ -71,12 +71,13 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
             child: Column(
             
               children: <Widget>[
-                const SizedBox(height: 30),
+                const SizedBox(height: 10),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 2,
+                  height: MediaQuery.of(context).size.height *0.4,
                   child: ClipRRect(
+                  
                     borderRadius: BorderRadius.circular(30),
-                    child: Image.asset('assets/images/otp.gif'),
+                    child: Image.asset('assets/images/otp.gif' , fit: BoxFit.cover,),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -122,7 +123,7 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                     key: formKey,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        vertical: 8.0,
+                        vertical: 1.0,
                         horizontal: 30,
                       ),
                       child: PinCodeTextField(
@@ -206,8 +207,8 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 2,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -232,7 +233,6 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                 const SizedBox(
                   height: 14,
                 ),
-          
                 FadeAnimation(
                   1,
                   custom_Button(

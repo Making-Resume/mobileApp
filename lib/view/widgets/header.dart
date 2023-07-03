@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../utils/loginPageAnimation.dart';
 
-custom_header({String? path, BuildContext? context}) {
+custom_header({String? path, BuildContext? context , double height = 300 , double width = 300}) {
   return Container(
     height: 400,
     width: MediaQuery.of(context!).size.width,
@@ -72,7 +72,8 @@ custom_header({String? path, BuildContext? context}) {
           child: FadeAnimation(
             1.6,
             Container(
-              //   height: 200,
+                height:height,
+                width: width,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
 

@@ -61,7 +61,7 @@ class _RegisterState extends State<Register> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-             custom_header(path: 'assets/images/login.json' , context: context),
+             custom_header(path: 'assets/images/register2.json' , context: context , height: 500 , width: 500),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Form(
