@@ -31,8 +31,21 @@ class _RegisterState extends State<Register> {
     await user.Register(email: email!)!.then(
       (value) {
         if (value is User) {
-          print(user);
-          Navigator.pushNamed(context, '/codeVerification');
+          if(value.code != 200){
+                      showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return RoundedAlertDialog(
+                title: 'Error',
+                message: value.message,
+              );
+            },
+          );
+          }else{
+             print(user);
+          Navigator.pushNamed(context, '/codeVerification2');
+          }
+         
         } else if (value is ApiError) {
           showDialog(
             context: context,

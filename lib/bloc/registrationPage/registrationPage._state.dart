@@ -26,7 +26,7 @@ class RegistrationLoading extends RegistrationState {
 
 
 class RegistrationSuccess extends RegistrationState {
-  final List<User>? users;
+  var users;
      double? width;
    double? height;
  RegistrationSuccess({this.users , this.width , this.height });

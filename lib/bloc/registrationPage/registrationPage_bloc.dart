@@ -26,10 +26,15 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         name: event.name,
         family: event.family,
         password: event.password,
-      )!.timeout(Duration(seconds: 2));
+      )!.timeout(Duration(seconds: 7));
 
       if (value is User) {
+      if(value.code !=  200){
+        emit(RegistrationFailure(height: 50, width: 200, error: value.message));
+      }else{
         emit(RegistrationSuccess(height: 50, width: 200, users: value.data));
+      }
+        
         // Navigator.pushNamed(context, '/codeVerification');
       } else if (value is ApiError) {
         emit(RegistrationFailure(height: 50, width: 200, error: value.message));

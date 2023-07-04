@@ -115,12 +115,15 @@ var formData = jsonEncode({
   Future<dynamic>? mainRegistration({required String name ,required String family , required String password }) async{
      User? user;
 var formData = jsonEncode({
-
-//  'EmailAddress': email,
-});
+   
+  'Email': 'ayobkafrashian@gmail.com',
+   'FirstName':name,
+   'LastName' : family,
+   'Password' :password,
+   });
   try {
    
-    Response userData = await DioClient().dio.post( BaseUrl.base_url! + '/api/user/register' , data: formData ,     options: Options(
+    Response userData = await DioClient().dio.post( BaseUrl.base_url! + '/api/user/getInformation' , data: formData ,     options: Options(
       headers:  {"Content-Type": "application/json"},
     ) );
     print('User Info: ${userData.data}');
