@@ -7,24 +7,31 @@ import 'package:resumemaker/utils/dioNetwork.dart';
 import 'ApiError.dart';
 
 class User {
-   int? statusCode;
+   int? code;
    String? message;
    var data;
+   String? errors;
+   String? action;
+
 
 
 
   User({
-       this.statusCode,
+       this.errors,
+       this.code,
        this.message,
        this.data,
+       this.action,
   });
 
   
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       message: json['message'],
-      statusCode: json['code'],
-      data: json['data'],
+      code: json['code'],
+      data: json['data'] != null ? json['data']['email'] :  '' ,
+       errors: json['errors'],
+       action: json['action'],
     );
   }
 }
@@ -43,7 +50,7 @@ class UserAuthenticationRepository {
      User? user;
 var formData = jsonEncode({
 
-  'EmailAddress': email,
+  'Email': email,
 });
   try {
    

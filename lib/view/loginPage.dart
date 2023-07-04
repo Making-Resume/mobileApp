@@ -158,10 +158,16 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       ),
                       FadeAnimation(
                           1.5,
-                          Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                                color: Color.fromRGBO(143, 148, 251, 1)),
+                          InkWell(
+                                                    onTap: () {
+                                Navigator.pushReplacementNamed(
+                                    context, '/forgotPassword');
+                              },
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                  color: Color.fromRGBO(143, 148, 251, 1)),
+                            ),
                           )),
                       SizedBox(
                         height: 10,

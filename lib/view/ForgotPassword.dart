@@ -9,12 +9,12 @@ import 'package:resumemaker/view/widgets/header.dart';
 
 import '../models/UserAuthentication.dart';
 
-class Register extends StatefulWidget {
+class forgotPassword extends StatefulWidget {
   @override
-  State<Register> createState() => _RegisterState();
+  State<forgotPassword> createState() => _forgotPasswordState();
 }
 
-class _RegisterState extends State<Register> {
+class _forgotPasswordState extends State<forgotPassword> {
   UserAuthenticationRepository user = UserAuthenticationRepository();
   final _formKey = GlobalKey<FormState>();
 
@@ -31,7 +31,6 @@ class _RegisterState extends State<Register> {
     await user.Register(email: email!)!.then(
       (value) {
         if (value is User) {
-          print(user);
           Navigator.pushNamed(context, '/codeVerification');
         } else if (value is ApiError) {
           showDialog(
@@ -57,12 +56,13 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Colors.white,
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-             custom_header(path: 'assets/images/register2.json' , context: context , height: 500 , width: 500),
+             custom_header(path: 'assets/images/forgotPassword.json' , context: context , height: 500 , width: 500),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Form(
@@ -109,7 +109,7 @@ class _RegisterState extends State<Register> {
                          custom_Button(
                                   width: width,
                                   height: height,
-                                  title: 'Register',
+                                  title: 'send',
                                   onTap: () async {
                               if (_formKey.currentState!.validate()) {
                                 await triggerButton(
@@ -131,7 +131,7 @@ class _RegisterState extends State<Register> {
                                   Navigator.pushReplacementNamed(context, '/loginPage');
                               },
                               child: Text(
-                                "Login",
+                                "back",
                                 style: TextStyle(
                                     color: Color.fromRGBO(143, 148, 251, 1)),
                               ))),

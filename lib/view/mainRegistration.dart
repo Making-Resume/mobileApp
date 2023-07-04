@@ -54,7 +54,7 @@ class RegistrationForm extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 custom_header(
-                    path: 'assets/images/register.json', context: context),
+                    path: 'assets/images/register.json', context: context , height: 400 , width: 400),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   child: Form(

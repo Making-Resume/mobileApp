@@ -72,6 +72,7 @@ custom_header({String? path, BuildContext? context , double height = 300 , doubl
           child: FadeAnimation(
             1.6,
             Container(
+             
                 height:height,
                 width: width,
               child: ClipRRect(
