@@ -1,11 +1,12 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
+import 'package:resumemaker/models/singleResume.dart';
+import 'package:resumemaker/utils/const/textStyle.dart';
 import 'package:resumemaker/utils/helper/homePageHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resumemaker/view/widgets/listDetail.dart';
 import 'package:showcaseview/showcaseview.dart';
-
 
 class home_page extends StatelessWidget {
   const home_page({Key? key}) : super(key: key);
@@ -13,27 +14,26 @@ class home_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShowCaseWidget(
-          onStart: (index, key) {
-            log('onStart: $index, $key');
-          },
-          onComplete: (index, key) {
-            log('onComplete: $index, $key');
-            if (index == 4) {
-              SystemChrome.setSystemUIOverlayStyle(
-                SystemUiOverlayStyle.light.copyWith(
-                  statusBarIconBrightness: Brightness.dark,
-                  statusBarColor: Colors.white,
-                ),
-              );
-            }
-          },
-          blurValue: 1,
-          builder: Builder(builder: (context) => const homePage()),
-          autoPlayDelay: const Duration(seconds: 3),
-        );
+      onStart: (index, key) {
+        log('onStart: $index, $key');
+      },
+      onComplete: (index, key) {
+        log('onComplete: $index, $key');
+        if (index == 4) {
+          SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle.light.copyWith(
+              statusBarIconBrightness: Brightness.dark,
+              statusBarColor: Colors.white,
+            ),
+          );
+        }
+      },
+      blurValue: 1,
+      builder: Builder(builder: (context) => const homePage()),
+      autoPlayDelay: const Duration(seconds: 3),
+    );
   }
 }
-
 
 class homePage extends StatefulWidget {
   const homePage({Key? key}) : super(key: key);
@@ -48,7 +48,7 @@ class _homePageState extends State<homePage> {
   final GlobalKey _three = GlobalKey();
   final GlobalKey _four = GlobalKey();
   final GlobalKey _five = GlobalKey();
-  List<Mail> mails = [];
+  List<singleResume> Resumes = [];
 
   final scrollController = ScrollController();
 
@@ -62,69 +62,60 @@ class _homePageState extends State<homePage> {
       (_) => ShowCaseWidget.of(context)
           .startShowCase([_one, _two, _three, _four, _five]),
     );
-    mails = [
-      Mail(
-        sender: 'Medium',
-        sub: 'Showcase View',
-        msg: 'Check new showcase View',
+    Resumes = [
+      singleResume(
+        title: 'applyResume',
+        description: 'this is a resume',
+        type: 'academic',
         date: '1 May',
-        isUnread: false,
       ),
-      Mail(
-        sender: 'Quora',
-        sub: 'New Question for you',
-        msg: 'Hi, There is new question for you',
+      singleResume(
+        title: 'jobApply',
+        description: 'this is a resume',
+        type: 'work',
         date: '2 May',
-        isUnread: true,
       ),
-      Mail(
-        sender: 'Google',
-        sub: 'Flutter 1.5',
-        msg: 'We have launched Flutter 1.5',
-        date: '3 May',
-        isUnread: false,
+      singleResume(
+        title: 'applyResume',
+        description: 'this is a resume',
+        type: 'academic',
+        date: '1 May',
       ),
-      Mail(
-        sender: 'Github',
-        sub: 'Showcase View',
-        msg: 'New star on your showcase view.',
-        date: '4 May ',
-        isUnread: true,
+      singleResume(
+        title: 'jobApply',
+        description: 'this is a resume',
+        type: 'work',
+        date: '2 May',
       ),
-      Mail(
-        sender: 'Simform',
-        sub: 'Credit card Plugin',
-        msg: 'Check out our credit card plugin',
-        date: '5 May',
-        isUnread: false,
+      singleResume(
+        title: 'applyResume',
+        description: 'this is a resume',
+        type: 'academic',
+        date: '1 May',
       ),
-      Mail(
-        sender: 'Flutter',
-        sub: 'Flutter is Future',
-        msg: 'Flutter launched for Web',
-        date: '6 May',
-        isUnread: true,
+      singleResume(
+        title: 'jobApply',
+        description: 'this is a resume',
+        type: 'work',
+        date: '2 May',
       ),
-      Mail(
-        sender: 'Medium',
-        sub: 'Showcase View',
-        msg: 'Check new showcase View',
-        date: '7 May ',
-        isUnread: false,
+      singleResume(
+        title: 'applyResume',
+        description: 'this is a resume',
+        type: 'academic',
+        date: '1 May',
       ),
-      Mail(
-        sender: 'Simform',
-        sub: 'Credit card Plugin',
-        msg: 'Check out our credit card plugin',
-        date: '8 May',
-        isUnread: true,
+      singleResume(
+        title: 'applyResume',
+        description: 'this is a resume',
+        type: 'academic',
+        date: '1 May',
       ),
-      Mail(
-        sender: 'Flutter',
-        sub: 'Flutter is Future',
-        msg: 'Flutter launched for Web',
-        date: '9 May',
-        isUnread: false,
+      singleResume(
+        title: 'jobApply',
+        description: 'this is a resume',
+        type: 'work',
+        date: '2 May',
       ),
     ];
   }
@@ -143,11 +134,29 @@ class _homePageState extends State<homePage> {
         bottom: false,
         child: Column(
           children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Container(
+                //   margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
+                //   width: 80,
+                //   height: 55,
+                //   decoration: BoxDecoration(
+                //     // shape: BoxShape.circle,
+                //     borderRadius: BorderRadius.circular(10),
+                //     color: Color(0xffFCD8DC),
+                //     image: DecorationImage(
+                //       fit: BoxFit.fill,
+                //       image: AssetImage('assets/images/logo.png')
+                //     ),
+                //   ),
+                // ),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                    margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
                   child: Center(
                     child: const Text(
-                      'Resumes',
+                      'Resumes List',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 15,
@@ -156,17 +165,20 @@ class _homePageState extends State<homePage> {
                     ),
                   ),
                 ),
-                const Padding(padding: EdgeInsets.only(top: 8)),
+              ],
+            ),
+            const Padding(padding: EdgeInsets.only(top: 8)),
             Expanded(
               child: ListView.builder(
                 controller: scrollController,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return showcaseMailTile(_three, true, context, mails.first);
+                    return showcaseResumeTile(
+                        _three, true, context, Resumes.first);
                   }
-                  return MailTile(
-                    mail: mails[index % mails.length],
+                  return ResumeTile(
+                    resume: Resumes[index % Resumes.length],
                   );
                 },
               ),
@@ -175,12 +187,12 @@ class _homePageState extends State<homePage> {
         ),
       ),
       floatingActionButton: Showcase(
-        key: _five,
-        title: 'Compose Mail',
-        description: 'Click here to compose mail',
+        key: _one,
+        title: 'making resume',
+        description: 'Click here to make resume',
         targetShapeBorder: const CircleBorder(),
         child: FloatingActionButton(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Color.fromRGBO(143, 148, 251, 1),
           onPressed: () {
             setState(() {
               /* reset ListView to ensure that the showcased widgets are
@@ -191,16 +203,14 @@ class _homePageState extends State<homePage> {
                   .startShowCase([_one, _two, _three, _four, _five]);
             });
           },
-          child: const Icon(
-              CupertinoIcons.add
-          ),
+          child: const Icon(CupertinoIcons.add),
         ),
       ),
     );
   }
 
-  GestureDetector showcaseMailTile(GlobalKey<State<StatefulWidget>> key,
-      bool showCaseDetail, BuildContext context, Mail mail) {
+  GestureDetector showcaseResumeTile(GlobalKey<State<StatefulWidget>> key,
+      bool showCaseDetail, BuildContext context, singleResume mail) {
     return GestureDetector(
       onTap: () {
         Navigator.push<void>(
@@ -214,7 +224,7 @@ class _homePageState extends State<homePage> {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Showcase(
             key: key,
-            description: 'Tap to check mail',
+            description: 'Tap to check resume',
             tooltipPosition: TooltipPosition.top,
             disposeOnTap: true,
             onTargetClick: () {
@@ -229,8 +239,8 @@ class _homePageState extends State<homePage> {
                 });
               });
             },
-            child: MailTile(
-              mail: mail,
+            child: ResumeTile(
+              resume: mail,
               showCaseKey: _four,
               showCaseDetail: showCaseDetail,
             )),
@@ -247,22 +257,28 @@ class SAvatarExampleChild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
-        width: 45,
-        height: 45,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color(0xffFCD8DC),
+        width: 60,
+        height: 80,
+        decoration: BoxDecoration(
+          // shape: BoxShape.circle,
+          borderRadius: BorderRadius.circular(3),
+          border: Border.all(color: Color.fromRGBO(143, 148, 251, .6) ,width: 2),
+          color:Color.fromRGBO(143, 148, 251, .6),
+          // image: DecorationImage(
+          //   fit: BoxFit.cover,
+          //   image: NetworkImage(
+          //     'https://marketplace.canva.com/EAFUtflIkDU/2/0/1131w/canva-pink-black-%26-white-minimalist-photo-high-school-resume-wtTKJtesNFc.jpg',
+          //     scale: 10,
+          //   ),
+          // ),
         ),
-        child: Center(
-          child: Text(
-            'S',
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+        child: AspectRatio(
+          aspectRatio: 16/ 9,
+          child: Image(
+            image: NetworkImage('https://marketplace.canva.com/EAFUtflIkDU/2/0/1131w/canva-pink-black-%26-white-minimalist-photo-high-school-resume-wtTKJtesNFc.jpg'),
+            fit: BoxFit.contain, // use this
           ),
         ),
       ),
@@ -270,44 +286,28 @@ class SAvatarExampleChild extends StatelessWidget {
   }
 }
 
-class Mail {
-  Mail({
-    required this.sender,
-    required this.sub,
-    required this.msg,
-    required this.date,
-    required this.isUnread,
-  });
-
-  String sender;
-  String sub;
-  String msg;
-  String date;
-  bool isUnread;
-}
-
-class MailTile extends StatelessWidget {
-  const MailTile(
-      {required this.mail,
+class ResumeTile extends StatelessWidget {
+   ResumeTile(
+      {required this.resume,
       this.showCaseDetail = false,
       this.showCaseKey,
       Key? key})
       : super(key: key);
   final bool showCaseDetail;
   final GlobalKey<State<StatefulWidget>>? showCaseKey;
-  final Mail mail;
+  final singleResume resume;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 6, right: 16, top: 8, bottom: 8),
-      color: mail.isUnread ? const Color(0xffFFF6F7) : Colors.white,
+      color: Colors.white,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Expanded(
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 if (showCaseDetail)
                   Showcase.withWidget(
@@ -358,34 +358,35 @@ class MailTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        mail.sender,
+                        resume.title!,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontWeight: mail.isUnread
-                              ? FontWeight.bold
-                              : FontWeight.normal,
+                          fontWeight: FontWeight.normal,
                           fontSize: 17,
                         ),
                       ),
-                      Text(
-                        mail.sub,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16,
-                        ),
+                      SizedBox(
+                        height:10,
                       ),
-                      Text(
-                        mail.msg,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: mail.isUnread
-                              ? Theme.of(context).primaryColor
-                              : Colors.black,
-                          fontSize: 15,
-                        ),
-                      ),
+                      Text(resume.type!,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle1(
+                            color: Colors.grey,
+                            size: 14,
+                          )),
+                      // Text(
+                      //   resume.description!,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.normal,
+                      //     color:
+                      //         // resume.isUnread
+                      //         //     ? Theme.of(context).primaryColor
+                      //         //  :
+                      //         Colors.black,
+                      //     fontSize: 15,
+                      //   ),
+                      // ),
                     ],
                   ),
                 )
@@ -400,7 +401,7 @@ class MailTile extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  mail.date,
+                  resume.date!,
                   style: const TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 12,
@@ -411,8 +412,11 @@ class MailTile extends StatelessWidget {
                   height: 10,
                 ),
                 Icon(
-                  mail.isUnread ? Icons.star : Icons.star_border,
-                  color: mail.isUnread ? const Color(0xffFBC800) : Colors.grey,
+                  //  resume.isUnread ? Icons.star :
+                  Icons.remove_red_eye,
+                  color:
+                      //mail.isUnread ? const Color(0xffFBC800) :
+                      Colors.grey,
                 ),
               ],
             ),
