@@ -59,7 +59,7 @@ var formData = jsonEncode({
    
     Response userData = await DioClient().dio.post( BaseUrl.base_url! + '/api/user/checkCode' , data: formData ,     options: Options(
       headers:  {"Content-Type": "application/json"},
-    ) );
+    ) ).timeout(Duration(seconds: 6));
     print('User Info: ${userData.data}');
     user = verification.fromJson(userData.data);
     return user;

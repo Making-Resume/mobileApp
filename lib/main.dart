@@ -1,10 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:resumemaker/view/ForgotPassword.dart';
 import 'package:resumemaker/view/RegisterPage.dart';
 import 'package:resumemaker/view/codeVerification2.dart';
+import 'package:resumemaker/view/homePage.dart';
 import 'package:resumemaker/view/loginPage.dart';
 import 'package:resumemaker/view/codeVerification.dart';
 import 'package:resumemaker/view/mainRegistration.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 void main() {
@@ -26,7 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       //home: Login(),
 
-     initialRoute: '/loginPage',
+     initialRoute: '/homePage',
       routes: {
        // '/': (context) => (),
         '/loginPage': (context) => Login(),
@@ -35,6 +40,28 @@ class MyApp extends StatelessWidget {
         '/registrationPage' : (context) => RegistrationPage(),
         '/codeVerification2':(context) =>  PinCodeVerificationScreen(),
         '/forgotPassword' : (context)=> forgotPassword(),
+        '/homePage' : (context) => home_page(),
+      //    Scaffold(
+      //   body: ShowCaseWidget(
+      //     onStart: (index, key) {
+      //       log('onStart: $index, $key');
+      //     },
+      //     onComplete: (index, key) {
+      //       log('onComplete: $index, $key');
+      //       if (index == 4) {
+      //         SystemChrome.setSystemUIOverlayStyle(
+      //           SystemUiOverlayStyle.light.copyWith(
+      //             statusBarIconBrightness: Brightness.dark,
+      //             statusBarColor: Colors.white,
+      //           ),
+      //         );
+      //       }
+      //     },
+      //     blurValue: 1,
+      //     builder: Builder(builder: (context) => const homePage()),
+      //     autoPlayDelay: const Duration(seconds: 3),
+      //   ),
+      // ),
       },
     );
   }

@@ -116,7 +116,7 @@ var formData = jsonEncode({
      User? user;
 var formData = jsonEncode({
    
-  'Email': 'ayobkafrashian@gmail.com',
+   'Email': 'ayobkafrashian@gmail.com',
    'FirstName':name,
    'LastName' : family,
    'Password' :password,
