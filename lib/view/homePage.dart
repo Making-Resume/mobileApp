@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:math';
+import 'dart:ui';
 import 'package:animated_icon/animated_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:resumemaker/models/singleResume.dart';
@@ -7,6 +8,7 @@ import 'package:resumemaker/utils/const/textStyle.dart';
 import 'package:resumemaker/utils/helper/homePageHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:resumemaker/utils/loginPageAnimation.dart';
 import 'package:resumemaker/view/widgets/listDetail.dart';
 import 'package:resumemaker/view/widgets/resume_item.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -150,14 +152,28 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+      appBar: AppBar(
+          backgroundColor: Color.fromRGBO(143, 148, 251, 1),
+          centerTitle: true,
+               title:  Text('Resumes  List',
+                          style: TextStyle1(
+                              color: Colors.white,
+                              size: 15,
+                           //   fontWeight: FontWeight.bold
+                              )),
+                    
+                  
+      ),
       backgroundColor: Colors.white,
-      body: SafeArea(
-        bottom: false,
-        child: Column(
+      body:
+
+  
+        Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          //  Row(
+             // mainAxisAlignment: MainAxisAlignment.center,
+             // children: [
                 // Container(
                 //   margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
                 //   width: 80,
@@ -172,44 +188,67 @@ class _homePageState extends State<homePage> {
                 //     ),
                 //   ),
                 // ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Center(
-                    child: Text('Resumes List',
-                        style: TextStyle1(
-                            color: Colors.black,
-                            size: 15,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                ),
-              ],
-            ),
+           //     Container(
+                //   height: 70,
+                //  // padding: const EdgeInsets.symmetric(vertical: 10),
+                
+                //  // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                //   child: SafeArea(
+                //     child: Center(
+                //       child: Text('Resumes List',
+                //           style: TextStyle1(
+                //               color: Colors.black,
+                //               size: 15,
+                //               fontWeight: FontWeight.bold)),
+                //     ),
+                //   ),
+                // ),
+            //  ],
+           // ),
+          //  Padding(
+          //   padding: EdgeInsets.all(20),
+          //   child: frostedGlassEffectDemo(context)
+          //   ),
             const Padding(padding: EdgeInsets.only(top: 8)),
             Expanded(
               child: ListView.builder(
+                itemCount: 3,
+              
                 controller: scrollController,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return ResumeTile(
-                    showCaseKey: _two,
-                    resume: Resumes.first,
-                    showCaseDetail: true,
-                  
-                  );
+                    return FadeAnimation(
+                      0.2,
+                       Padding(
+                         padding: const EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
+                         child: ResumeTile(index: index,
+                                             showCaseKey: _two,
+                                             resume: Resumes.first,
+                                             showCaseDetail: true,
+                                        
+                                        ),
+                       ),
+                    );
                   }
-                  return ResumeTile(
-                    showCaseKey: _two,
-                    resume: Resumes[index % Resumes.length],
-                  
+                  return 
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    child: FadeAnimation(
+                        0.2,
+                        ResumeTile(
+                          index: index,
+                      showCaseKey: _two,
+                      resume: Resumes[index % Resumes.length],
+                        )
+                    ),
                   );
                 },
               ),
             ),
           ],
         ),
-      ),
+     // ),
       floatingActionButton: Showcase(
         key: _one,
         title: 'making resume',
@@ -219,19 +258,19 @@ class _homePageState extends State<homePage> {
           label: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: Text('Add Resume'),
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Text('Create'),
               ),
               AnimateIcon(
                 color: Colors.purple[100]!,
                 //key: UniqueKey(),
                 onTap: () {},
                 iconType: IconType.continueAnimation,
-                height: 30,
-                width: 30,
+                height: 20,
+                width: 20,
                 // color:
 
-                animateIcon: AnimateIcons.add,
+                animateIcon: AnimateIcons.edit,
               ),
             ],
           ),
@@ -288,3 +327,5 @@ class _homePageState extends State<homePage> {
   //       );
   // }
 }
+
+
