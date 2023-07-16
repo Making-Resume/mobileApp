@@ -8,6 +8,7 @@ TextStyle TextStyle1({double? size = 10 , Color? color =Colors.black , FontWeigh
        fontWeight: fontWeight,
               color: color,
         
+         letterSpacing: 1,
         fontFamily: 'circular',
    );
 }

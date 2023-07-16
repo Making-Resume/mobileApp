@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resumemaker/view/ForgotPassword.dart';
 import 'package:resumemaker/view/RegisterPage.dart';
+import 'package:resumemaker/view/categoryPage.dart';
 import 'package:resumemaker/view/codeVerification2.dart';
 import 'package:resumemaker/view/homePage.dart';
 import 'package:resumemaker/view/loginPage.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       //home: Login(),
 
-     initialRoute: '/homePage',
+     initialRoute: '/categoryPage',
       routes: {
        // '/': (context) => (),
         '/loginPage': (context) => Login(),
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         '/codeVerification2':(context) =>  PinCodeVerificationScreen(),
         '/forgotPassword' : (context)=> forgotPassword(),
         '/homePage' : (context) => home_page(),
+        '/categoryPage' : (context) => CategoryPage(),
       //    Scaffold(
       //   body: ShowCaseWidget(
       //     onStart: (index, key) {

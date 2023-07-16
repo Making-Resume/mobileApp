@@ -1,12 +1,15 @@
 import 'dart:ui';
 
 import 'package:animated_icon/animated_icon.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:glass/glass.dart';
+import 'package:resumemaker/utils/const/size.dart';
+import 'package:resumemaker/view/widgets/avatarOfResumesItem.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 import '../../models/singleResume.dart';
 import '../../utils/const/textStyle.dart';
-import 'avatarOfResumesItem.dart';
 
 class ResumeTile extends StatelessWidget {
   ResumeTile(
@@ -26,132 +29,180 @@ class ResumeTile extends StatelessWidget {
       textDirection: (index! % 2) == 0 ? TextDirection.ltr : TextDirection.rtl,
       child: Center(
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           child: Container(
-            child: Stack(children: [
+            child: Stack(
+              children: [
               BackdropFilter(
+              
                 filter: ImageFilter.blur(
-                  sigmaX: 7,
-                  sigmaY: 7,
+                  sigmaX: 2,
+                  sigmaY: 2,
+                
                 ),
                 child: Container(
-                  height: 190,
-                  width: 360,
-                ),
+                  height: DeviceSize.getHeight(context) * 0.3,
+                  width: DeviceSize.getHeight(context) * 0.6,
+            
+                )
               ),
-              Expanded(
-                child: Container(
-                  height: 190,
-                  width: 360,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(143, 148, 251, .6),
-                        )
-                      ],
-                      border: Border.all(
-                          color: Colors.white.withOpacity(0.2), width: 1.0),
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromRGBO(143, 148, 251, 1),
-                          // Colors.white.withOpacity(0.5),
-                          Colors.white.withOpacity(0.2)
-                        ],
-                        stops: [0.0, 1.0],
-                      ),
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        SAvatarExampleChild(
-                          urlPicture: resume.picture,
+              Container(
+                height: DeviceSize.getHeight(context) * 0.3,
+                width: DeviceSize.getHeight(context) * 0.6,
+                decoration: BoxDecoration(
+                  
+                             image:DecorationImage(
+                              fit: BoxFit.fill,
+                              opacity: 0.4,
+                      image: NetworkImage(
+                        'https://www.filepicker.io/api/file/4CcxWBfKQZOYlBlzOWU0',
+
                         ),
-                        const Padding(padding: EdgeInsets.only(left: 20)),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Flexible(
-                                child: Text(
-                                resume.title!,
-                                                        
-                                 overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromRGBO(143, 148, 251, .6),
+                      )
+                    ],
+                    border: Border.all(
+                        color: Colors.white.withOpacity(0.2), width: 1.0),
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromRGBO(143, 148, 251, 1),
+                        Colors.white.withOpacity(0.2),
+                        Colors.white.withOpacity(0.5),
+                      ],
+                      stops: [0.0, 0.5, 1.0],
+                    ),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      SAvatarExampleChild(
+                        urlPicture: resume.picture,
+                      ),
+                      const Padding(padding: EdgeInsets.only(left: 20)),
+                      Expanded(
+                        child: Column(
+                          // crossAxisAlignment: (index! % 2) == 0  ?  CrossAxisAlignment.start :  CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Flexible(
+                              child: showCaseDetail ?
+                              
+                              DefaultTextStyle(
+                                style: TextStyle1(
+                                  color: Colors.white,
+                                  size: 18,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Flexible(
-                                child: Text(resume.type!,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle1(
-                                      color: Colors.black87,
-                                      size: 14,
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  resume.date!,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 9,
-                                    color: Colors.black54,
-                                  ),
+                                child: AnimatedTextKit(
+                                
+                                  animatedTexts: [
+                                    ColorizeAnimatedText(
+                                      
+                                      resume.title! , colors: [
+                                      Colors.white,
+                                  
+                                      Color.fromRGBO(143, 148, 251, 1),
+                                      Color.fromRGBO(121, 127, 241, 1),
+                                    ],
+                                    speed: Duration(milliseconds: 350),
+                                    textStyle:  TextStyle1(
+                                 // color: Colors.white,
+                                  size: 18,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    showCaseDetail
-                                        ? Showcase(
-                                            key: showCaseKey!,
-                                            title: 'view resume',
-                                            description:
-                                                'Click here to view and edit resume',
-                                            targetShapeBorder: const CircleBorder(),
-                                            child: AnimateIcon(
-                                              color:
-                                                  Color.fromRGBO(143, 148, 251, 1),
-                                              //key: UniqueKey(),
-                                              onTap: () {},
-                                              iconType: IconType.continueAnimation,
-                                              height: 20,
-                                              width: 20,
-                                            
-                                              animateIcon: AnimateIcons.eye,
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: const Icon(
-                                              Icons.remove_red_eye,
-                                              size: 22.0,
-                                              color:
-                                                  Color.fromRGBO(143, 148, 251, 1),
-                                            ),
-                                          ),
+                                    ),
+                                    // WavyAnimatedText('Look at the waves'),
                                   ],
+                                  repeatForever: true,
+                                  isRepeatingAnimation: true,
+                                  onTap: () {
+                                    print("Tap Event");
+                                  },
                                 ),
                               )
-                            ],
-                          ),
+                              :
+                              Text(
+                              resume.title!,
+
+                                 textAlign: TextAlign.left,
+                               overflow: TextOverflow.ellipsis,
+                                style: TextStyle1(
+                                    color: Colors.white,
+                                    size: 20,
+                                  )
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Flexible(
+                              child: Text(resume.type!,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle1(
+                                    color: Colors.white,
+                                    size: 18,
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Flexible(
+                              child: Text(
+                                resume.date!,
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  showCaseDetail
+                                      ? Showcase(
+                                          key: showCaseKey!,
+                                          title: 'view resume',
+                                          description:
+                                              'Click here to view and edit resume',
+                                          targetShapeBorder:
+                                              const CircleBorder(),
+                                          child: AnimateIcon(
+                                            color: Color.fromRGBO(
+                                                143, 148, 251, 1),
+                                            //key: UniqueKey(),
+                                            onTap: () {},
+                                            iconType:
+                                                IconType.continueAnimation,
+                                            height: 20,
+                                            width: 20,
+
+                                            animateIcon: AnimateIcons.eye,
+                                          ),
+                                        )
+                                      : Icon(
+                                          Icons.remove_red_eye,
+                                          size: 22.0,
+                                          color:
+                                              Color.fromRGBO(143, 148, 251, 1),
+                                        ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:math';
 import 'dart:ui';
 import 'package:animated_icon/animated_icon.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:resumemaker/models/singleResume.dart';
 import 'package:resumemaker/utils/const/textStyle.dart';
@@ -12,6 +13,8 @@ import 'package:resumemaker/utils/loginPageAnimation.dart';
 import 'package:resumemaker/view/widgets/listDetail.dart';
 import 'package:resumemaker/view/widgets/resume_item.dart';
 import 'package:showcaseview/showcaseview.dart';
+
+import '../utils/const/size.dart';
 
 class home_page extends StatelessWidget {
   const home_page({Key? key}) : super(key: key);
@@ -50,7 +53,7 @@ class homePage extends StatefulWidget {
 class _homePageState extends State<homePage> {
   final GlobalKey _one = GlobalKey();
   final GlobalKey _two = GlobalKey();
-    final GlobalKey _three = GlobalKey();
+  final GlobalKey _three = GlobalKey();
   List<singleResume> Resumes = [];
 
   final scrollController = ScrollController();
@@ -152,103 +155,178 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      appBar: AppBar(
-          backgroundColor: Color.fromRGBO(143, 148, 251, 1),
-          centerTitle: true,
-               title:  Text('Resumes  List',
-                          style: TextStyle1(
-                              color: Colors.white,
-                              size: 15,
-                           //   fontWeight: FontWeight.bold
-                              )),
-                    
-                  
-      ),
-      backgroundColor: Colors.white,
-      body:
+      // appBar: AppBar(
+      //   backgroundColor: Color.fromRGBO(143, 148, 251, 1),
+      //   centerTitle: true,
+      //   title: Container(
+      //     width: 300.0,
+      //     child: Center(
+      //       child: DefaultTextStyle(
+      //         textAlign: TextAlign.center,
+      //         style: TextStyle1(
+      //             color: Colors.white, fontWeight: FontWeight.bold, size: 15),
+      //         child: AnimatedTextKit(
+      //           isRepeatingAnimation: true,
+      //           repeatForever: true,
+      //           animatedTexts: [
+      //             TypewriterAnimatedText(
+      //               'Build your resume',
+      //               speed: Duration(milliseconds: 200),
+      //             ),
+      //             TypewriterAnimatedText('make your future',
+      //                 speed: Duration(milliseconds: 200)),
+      //           ],
+      //           onTap: () {
+      //             print("Tap Event");
+      //           },
+      //         ),
+      //       ),
+      //     ),
+      //   ),
 
-  
-        Column(
-          children: <Widget>[
+      //   // Text('Resumes  List',
+      //   //           style: TextStyle1(
+      //   //               color: Colors.white,
+      //   //               size: 15,
+      //   //            //   fontWeight: FontWeight.bold
+      //   //               )),
+      // ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: <Widget>[
+
+          Container(
+            decoration: BoxDecoration(
+              color:  Color.fromRGBO(143, 148, 251, 1),
+             // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))
+            ),
+
+            height: DeviceSize.getHeight(context) * 0.15,
+            width:DeviceSize.getWidth(context) ,
+            child:
+           
+                Center(
+                  child: DefaultTextStyle(
+                    textAlign: TextAlign.center,
+                    style: TextStyle1(
+                        color: Colors.white, fontWeight: FontWeight.bold, size: 15),
+                    child: AnimatedTextKit(
+                      isRepeatingAnimation: true,
+                      repeatForever: true,
+                      animatedTexts: [
+                        TypewriterAnimatedText(
+                          'Build your resume',
+                          speed: Duration(milliseconds: 200),
+                        ),
+                        TypewriterAnimatedText('make your future',
+                            speed: Duration(milliseconds: 200)),
+                      ],
+                      onTap: () {
+                        print("Tap Event");
+                      },
+                    ),
+                  ),
+                ),
+           
+            ),
+        
+        
           //  Row(
-             // mainAxisAlignment: MainAxisAlignment.center,
-             // children: [
-                // Container(
-                //   margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
-                //   width: 80,
-                //   height: 55,
-                //   decoration: BoxDecoration(
-                //     // shape: BoxShape.circle,
-                //     borderRadius: BorderRadius.circular(10),
-                //     color: Color(0xffFCD8DC),
-                //     image: DecorationImage(
-                //       fit: BoxFit.fill,
-                //       image: AssetImage('assets/images/logo.png')
-                //     ),
-                //   ),
-                // ),
-           //     Container(
-                //   height: 70,
-                //  // padding: const EdgeInsets.symmetric(vertical: 10),
-                
-                //  // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                //   child: SafeArea(
-                //     child: Center(
-                //       child: Text('Resumes List',
-                //           style: TextStyle1(
-                //               color: Colors.black,
-                //               size: 15,
-                //               fontWeight: FontWeight.bold)),
-                //     ),
-                //   ),
-                // ),
-            //  ],
-           // ),
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // children: [
+          // Container(
+          //   margin: EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
+          //   width: 80,
+          //   height: 55,
+          //   decoration: BoxDecoration(
+          //     // shape: BoxShape.circle,
+          //     borderRadius: BorderRadius.circular(10),
+          //     color: Color(0xffFCD8DC),
+          //     image: DecorationImage(
+          //       fit: BoxFit.fill,
+          //       image: AssetImage('assets/images/logo.png')
+          //     ),
+          //   ),
+          // ),
+          //     Container(
+          //   height: 70,
+          //  // padding: const EdgeInsets.symmetric(vertical: 10),
+
+          //  // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          //   child: SafeArea(
+          //     child: Center(
+          //       child: Text('Resumes List',
+          //           style: TextStyle1(
+          //               color: Colors.black,
+          //               size: 15,
+          //               fontWeight: FontWeight.bold)),
+          //     ),
+          //   ),
+          // ),
+          //  ],
+          // ),
           //  Padding(
           //   padding: EdgeInsets.all(20),
           //   child: frostedGlassEffectDemo(context)
           //   ),
-            const Padding(padding: EdgeInsets.only(top: 8)),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 3,
+      
+        Container(
               
-                controller: scrollController,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return FadeAnimation(
-                      0.2,
-                       Padding(
-                         padding: const EdgeInsets.symmetric(vertical: 10 , horizontal: 10),
-                         child: ResumeTile(index: index,
-                                             showCaseKey: _two,
-                                             resume: Resumes.first,
-                                             showCaseDetail: true,
-                                        
-                                        ),
-                       ),
-                    );
-                  }
-                  return 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: FadeAnimation(
+             margin: EdgeInsets.only(top: 85),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25) , topRight: Radius.circular(25)),
+                 color: Colors.white,
+                 
+              ),
+              child: Container(
+               margin: EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25) , topRight: Radius.circular(25)),
+              //   color: Colors.white,
+                 
+              ),
+                child: ListView.builder(
+                  padding: EdgeInsets.only(top: 5),
+                 
+                    
+                  itemCount: 7,
+                  controller: scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return FadeAnimation(
                         0.2,
-                        ResumeTile(
-                          index: index,
-                      showCaseKey: _two,
-                      resume: Resumes[index % Resumes.length],
-                        )
-                    ),
-                  );
-                },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 10),
+                          child: ResumeTile(
+                            index: index,
+                            showCaseKey: _two,
+                            resume: Resumes.first,
+                            showCaseDetail: true,
+                          ),
+                        ),
+                      );
+                    }
+                    return Padding(
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                      child: FadeAnimation(
+                          0.2,
+                          ResumeTile(
+                            index: index,
+                            showCaseKey: _two,
+                            resume: Resumes[index % Resumes.length],
+                          )),
+                    );
+                  },
+                ),
               ),
             ),
-          ],
-        ),
-     // ),
+         
+        ],
+      ),
+      // ),
       floatingActionButton: Showcase(
         key: _one,
         title: 'making resume',
@@ -259,7 +337,29 @@ class _homePageState extends State<homePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Text('Create'),
+                child: SizedBox(
+                  // width: 250.0,
+                  child: DefaultTextStyle(
+                    style: TextStyle1(
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                    child: Container(
+                      width: 70,
+                      child: AnimatedTextKit(
+                        isRepeatingAnimation: true,
+                        repeatForever: true,
+                        animatedTexts: [
+                          TyperAnimatedText('create',
+                              speed: Duration(milliseconds: 200)),
+                        ],
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                      ),
+                    ),
+                  ),
+                ),
               ),
               AnimateIcon(
                 color: Colors.purple[100]!,
@@ -327,5 +427,3 @@ class _homePageState extends State<homePage> {
   //       );
   // }
 }
-
-
