@@ -109,7 +109,8 @@ class _RegisterState extends State<Register> {
                                           return 'Please enter your email';
                                         }
                                         return null;
-                                      }),
+                                      }
+                                      ),
                                 ),
                               ],
                             ),

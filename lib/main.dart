@@ -6,10 +6,12 @@ import 'package:resumemaker/view/ForgotPassword.dart';
 import 'package:resumemaker/view/RegisterPage.dart';
 import 'package:resumemaker/view/categoryPage.dart';
 import 'package:resumemaker/view/codeVerification2.dart';
+import 'package:resumemaker/view/completingTheForm.dart';
 import 'package:resumemaker/view/homePage.dart';
 import 'package:resumemaker/view/loginPage.dart';
 import 'package:resumemaker/view/codeVerification.dart';
 import 'package:resumemaker/view/mainRegistration.dart';
+import 'package:resumemaker/view/template_type.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
@@ -32,9 +34,9 @@ class MyApp extends StatelessWidget {
       ),
       //home: Login(),
 
-     initialRoute: '/categoryPage',
+     initialRoute: '/completingForm',
       routes: {
-       // '/': (context) => (),
+     // '/': (context) => ,
         '/loginPage': (context) => Login(),
         '/registerPage' : (context) => Register(),
         '/codeVerification' :(context) => codeVerification(),
@@ -43,6 +45,8 @@ class MyApp extends StatelessWidget {
         '/forgotPassword' : (context)=> forgotPassword(),
         '/homePage' : (context) => home_page(),
         '/categoryPage' : (context) => CategoryPage(),
+        '/template_type' : (context) =>  Template_Type(),
+        '/completingForm' : (context) => UserForm(),
       //    Scaffold(
       //   body: ShowCaseWidget(
       //     onStart: (index, key) {
