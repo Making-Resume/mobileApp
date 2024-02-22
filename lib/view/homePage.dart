@@ -354,6 +354,7 @@ class _homePageState extends State<homePage> {
                               speed: Duration(milliseconds: 200)),
                         ],
                         onTap: () {
+                          Navigator.pushNamed(context ,'/categoryPage');
                           print("Tap Event");
                         },
                       ),
@@ -364,7 +365,9 @@ class _homePageState extends State<homePage> {
               AnimateIcon(
                 color: Colors.purple[100]!,
                 //key: UniqueKey(),
-                onTap: () {},
+                onTap: () {
+                   Navigator.pushNamed(context ,'/categoryPage');
+                },
                 iconType: IconType.continueAnimation,
                 height: 20,
                 width: 20,

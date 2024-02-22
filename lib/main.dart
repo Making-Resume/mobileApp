@@ -11,6 +11,7 @@ import 'package:resumemaker/view/homePage.dart';
 import 'package:resumemaker/view/loginPage.dart';
 import 'package:resumemaker/view/codeVerification.dart';
 import 'package:resumemaker/view/mainRegistration.dart';
+import 'package:resumemaker/view/signInWithLinkedIn.dart';
 import 'package:resumemaker/view/template_type.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:sms_autofill/sms_autofill.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       ),
       //home: Login(),
 
-     initialRoute: '/completingForm',
+     initialRoute: '/signInWithlinkedIN',
       routes: {
      // '/': (context) => ,
         '/loginPage': (context) => Login(),
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/categoryPage' : (context) => CategoryPage(),
         '/template_type' : (context) =>  Template_Type(),
         '/completingForm' : (context) => UserForm(),
+         '/signInWithlinkedIN' : (context) => signInWithLinkedIn(),
       //    Scaffold(
       //   body: ShowCaseWidget(
       //     onStart: (index, key) {

@@ -52,6 +52,8 @@ dependencies:
   flutter_form_builder: ^7.7.0
   image_picker: ^1.0.2
   textfield_tags: ^2.0.2
+  flutter_rating_bar: ^4.0.1
+  
   
 
 dev_dependencies:

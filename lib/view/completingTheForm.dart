@@ -2,6 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:resumemaker/view/widgets/addAlertDialogForJob.dart';
+import 'package:resumemaker/view/widgets/addAlertDialogForLanguageSkill.dart';
+import 'package:resumemaker/view/widgets/addAlertDialogForProjects.dart';
+import 'package:resumemaker/view/widgets/addAlerttDIaligForEducation.dart';
 import 'package:resumemaker/view/widgets/custom_textFormField.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
@@ -14,6 +18,11 @@ class UserForm extends StatefulWidget {
 
 class _UserFormState extends State<UserForm> {
   TextEditingController firstNA = TextEditingController();
+  TextEditingController lastNA = TextEditingController();
+  TextEditingController jobTitleController = TextEditingController();
+  TextEditingController jobStatusContoller = TextEditingController();
+  TextEditingController siteController = TextEditingController();
+  TextEditingController linkedinController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   double? _distanceToField;
   TextfieldTagsController? _controller;
@@ -21,6 +30,8 @@ class _UserFormState extends State<UserForm> {
   String lastName = '';
   String jobTitle = '';
   String jobStatus = '';
+  String site = '';
+  String linkedin = '';
   String aboutMe = '';
   DateTime? selectedDate;
   XFile? image;
@@ -30,7 +41,20 @@ class _UserFormState extends State<UserForm> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2028),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Color.fromRGBO(143, 148, 251, 1),// Your desired primary color
+            accentColor: Color.fromRGBO(143, 148, 251, 1), // Your desired accent color
+            colorScheme: ColorScheme.light(
+                primary: Color.fromRGBO(143, 148, 251, 1),), // Your desired color scheme
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            backgroundColor: Color.fromRGBO(143, 148, 251, 1), // Set the background color here
+          ),
+          child: child!,
+        );
+      },
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -177,7 +201,7 @@ class _UserFormState extends State<UserForm> {
                   },
                 ),
                 SizedBox(
-                  height: 7,
+                  height: 8,
                 ),
                 TextFormField(
                   decoration: InputDecoration(
@@ -203,6 +227,56 @@ class _UserFormState extends State<UserForm> {
                 ),
                 SizedBox(
                   height: 7,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'site',
+
+                    contentPadding: EdgeInsets.all(10),
+                    errorStyle: TextStyle1(color: Colors.red[400], size: 11),
+                    border: OutlineInputBorder(
+                      // Add this line to include a bord
+                      //er
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(),
+                    ),
+                    // hintText: hintText,
+
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      site = value;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'linkedin',
+
+                    contentPadding: EdgeInsets.all(10),
+                    errorStyle: TextStyle1(color: Colors.red[400], size: 11),
+                    border: OutlineInputBorder(
+                      // Add this line to include a bord
+                      //er
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(),
+                    ),
+                    // hintText: hintText,
+
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      linkedin = value;
+                    });
+                  },
+                ),
+                SizedBox(
+                  height: 8,
                 ),
                 TextFormField(
                   maxLines: 3,
@@ -378,8 +452,9 @@ class _UserFormState extends State<UserForm> {
                                 5, // Set the itemCount according to your data
                             itemBuilder: (context, index) {
                               return Container(
-                              alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.only(bottom: 10 , left: 10),
+                                alignment: Alignment.centerLeft,
+                                margin: EdgeInsets.only(
+                                    bottom: 10, left: 10, top: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -394,9 +469,19 @@ class _UserFormState extends State<UserForm> {
                           ),
                         ),
                       ),
-                     // Add other widgets here, like IconButton
+                      // Add other widgets here, like IconButton
                       IconButton(
                         onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return addAlertDialog(
+                                firstWord: 'job title',
+                                secondWord: 'Company Name',
+                                thirdWord: 'Job Description',
+                              );
+                            },
+                          );
                           print('the button is pressed');
                         },
                         icon: Icon(Icons.add),
@@ -409,7 +494,7 @@ class _UserFormState extends State<UserForm> {
                       border:
                           Border.all(color: Color.fromRGBO(143, 148, 251, 1))),
                 ),
-                          Padding(
+                Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Align(
                     alignment: Alignment.centerLeft,
@@ -433,15 +518,18 @@ class _UserFormState extends State<UserForm> {
                                 5, // Set the itemCount according to your data
                             itemBuilder: (context, index) {
                               return Container(
-                              alignment: Alignment.centerLeft,
-                                margin: EdgeInsets.only(bottom: 10 , left: 10),
+                                alignment: Alignment.centerLeft,
+                                margin: EdgeInsets.only(
+                                    bottom: 10, left: 10, top: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('job title'),
-                                    Text('company name '),
-                                    Text('about the job'),
+                                    Text('Field of Study'),
+                                    Text(
+                                        'Name of university/educational institution'),
+                                    Text('Grade'),
+                                    Text("years --- years"),
                                   ],
                                 ),
                               );
@@ -449,10 +537,21 @@ class _UserFormState extends State<UserForm> {
                           ),
                         ),
                       ),
-                     // Add other widgets here, like IconButton
+                      // Add other widgets here, like IconButton
                       IconButton(
                         onPressed: () {
-                          print('the button is pressed');
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return addAlertDialogForEducation(
+                                firstWord: 'Field of Study',
+                                secondWord:
+                                    'Name of university/educational institution',
+                                thirdWord: 'Grade',
+                                forthWord: 'years of study',
+                              );
+                            },
+                          );
                         },
                         icon: Icon(Icons.add),
                       ),
@@ -464,6 +563,135 @@ class _UserFormState extends State<UserForm> {
                       border:
                           Border.all(color: Color.fromRGBO(143, 148, 251, 1))),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('languages'),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  height: 100,
+                  width: 500,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 5),
+                          height: 80,
+                          child: ListView.builder(
+                            scrollDirection: Axis
+                                .vertical, // Adjust the scroll direction if needed
+                            itemCount:
+                                5, // Set the itemCount according to your data
+                            itemBuilder: (context, index) {
+                              return Container(
+                                alignment: Alignment.centerLeft,
+                                margin: EdgeInsets.only(
+                                    bottom: 10, left: 10, top: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('The name of the language'),
+                                    Text('Mastery level'),
+                                    //Text('about the job'),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      // Add other widgets here, like IconButton
+                      IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return addAlertDialogForLanguageSkill(
+                                firstWord: 'the name of the language',
+                                secondWord: 'Mastery level',
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.add),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border:
+                          Border.all(color: Color.fromRGBO(143, 148, 251, 1))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Achievement'),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  height: 100,
+                  width: 500,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 5),
+                          height: 80,
+                          child: ListView.builder(
+                            scrollDirection: Axis
+                                .vertical, // Adjust the scroll direction if needed
+                            itemCount:
+                                5, // Set the itemCount according to your data
+                            itemBuilder: (context, index) {
+                              return Container(
+                                alignment: Alignment.centerLeft,
+                                margin: EdgeInsets.only(
+                                    bottom: 10, left: 10, top: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('type of achievement'),
+                                    Text('Description'),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      // Add other widgets here, like IconButton
+                      IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return addAlertDialogForProjects(
+                                firstWord: 'type of achievement',
+                                secondWord: 'Description',
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.add),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border:
+                          Border.all(color: Color.fromRGBO(143, 148, 251, 1))),
+                ),
+
+
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(
