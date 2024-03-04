@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:resumemaker/view/widgets/custom_Button.dart';
+import 'package:resumemaker/utils/const/size.dart';
 
 class signInWithLinkedIn extends StatefulWidget {
   const signInWithLinkedIn({Key? key}) : super(key: key);
@@ -19,12 +21,28 @@ class _signInWithLinkedInState extends State<signInWithLinkedIn> {
       ),
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Container(
+              padding: EdgeInsets.only(bottom: 50, top: 20),
+              height: DeviceSize.getHeight(context) * 0.4,
+              width: DeviceSize.getWidth(context) * 0.5,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Lottie.asset("assets/images/linkedin.json"),
+
+                //      Image.asset('assets/images/login.gif' ,
+                // ),
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("with signing with liknedin , your resume will make very fast")
+                Text(
+                    "with signing with liknedin , your resume will make very fast")
               ],
             ),
             SizedBox(
@@ -35,8 +53,8 @@ class _signInWithLinkedInState extends State<signInWithLinkedIn> {
               children: [
                 custom_Button_with_Icon(
                   pathOfPicture: "assets/images/linkedin.png",
-                  width: 400,
-                  height: 50,
+                  height: DeviceSize.getHeight(context) * 0.09,
+                  width: DeviceSize.getWidth(context) * 0.8,
                   title: 'Sign In with Linkedin',
                   onTap: () async {
                     // if (_formKey.currentState!.validate()) {
@@ -47,7 +65,16 @@ class _signInWithLinkedInState extends State<signInWithLinkedIn> {
                   },
                 ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            TextButton(
+              onPressed: () {
+                print("ok");
+              },
+              child: Text("if you dont have an linkedin account , click here"),
+            ),
           ],
         ),
       ),

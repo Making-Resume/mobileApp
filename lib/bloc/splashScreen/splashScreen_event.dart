@@ -1,0 +1,11 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
+
+abstract class SplashEvent extends Equatable {
+  const SplashEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class SplashStarted extends SplashEvent {}

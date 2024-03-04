@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resumemaker/view/ForgotPassword.dart';
 import 'package:resumemaker/view/RegisterPage.dart';
+import 'package:resumemaker/view/SpalshScreen.dart';
 import 'package:resumemaker/view/categoryPage.dart';
 import 'package:resumemaker/view/codeVerification2.dart';
 import 'package:resumemaker/view/completingTheForm.dart';
@@ -11,6 +12,7 @@ import 'package:resumemaker/view/homePage.dart';
 import 'package:resumemaker/view/loginPage.dart';
 import 'package:resumemaker/view/codeVerification.dart';
 import 'package:resumemaker/view/mainRegistration.dart';
+import 'package:resumemaker/view/showDetailOfResume.dart';
 import 'package:resumemaker/view/signInWithLinkedIn.dart';
 import 'package:resumemaker/view/template_type.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -35,9 +37,9 @@ class MyApp extends StatelessWidget {
       ),
       //home: Login(),
 
-     initialRoute: '/signInWithlinkedIN',
+     initialRoute: '/showResumeDetail',
       routes: {
-     // '/': (context) => ,
+      // '/': (context) => splash_screen() ,
         '/loginPage': (context) => Login(),
         '/registerPage' : (context) => Register(),
         '/codeVerification' :(context) => codeVerification(),
@@ -49,6 +51,7 @@ class MyApp extends StatelessWidget {
         '/template_type' : (context) =>  Template_Type(),
         '/completingForm' : (context) => UserForm(),
          '/signInWithlinkedIN' : (context) => signInWithLinkedIn(),
+         '/showResumeDetail' : (context) => showDetailOfResume(),
       //    Scaffold(
       //   body: ShowCaseWidget(
       //     onStart: (index, key) {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:resumemaker/models/ApiError.dart';
 import 'package:resumemaker/models/UserAuthentication.dart';
@@ -10,7 +12,7 @@ import 'package:resumemaker/view/widgets/custom_textFormField.dart';
 import 'package:resumemaker/view/widgets/header.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-class Login extends StatefulWidget  {
+class Login extends StatefulWidget {
   @override
   State<Login> createState() => _LoginState();
 }
@@ -21,15 +23,12 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   UserAuthenticationRepository user = UserAuthenticationRepository();
   final _formKey = GlobalKey<FormState>();
 
-
   double? width = 200.0;
   double? height = 50.0;
   bool? _isLoading = false;
+ 
   @override
-  void initState() {
 
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -65,7 +64,6 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
       _isLoading = false;
     });
   }
-    
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +73,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
         child: Container(
           child: Column(
             children: <Widget>[
-              custom_header(path: 'assets/images/login.json' ,  context: context ),
+              custom_header(path: 'assets/images/login.json', context: context),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Form(
@@ -144,12 +142,12 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                           title: 'Login',
                           onTap: () async {
                             //if (_formKey.currentState!.validate()) {
-                              // await triggerButton(
-                              //     email: _enamilController.text,
-                              //     password: _passwordController.text);
-                                                              Navigator.pushReplacementNamed(
-                                    context, '/codeVerification2');
-                          //  }
+                            // await triggerButton(
+                            //     email: _enamilController.text,
+                            //     password: _passwordController.text);
+                            Navigator.pushReplacementNamed(
+                                context, '/codeVerification2');
+                            //  }
                           },
                         ),
                       ),
@@ -159,10 +157,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       FadeAnimation(
                           1.5,
                           InkWell(
-                                                    onTap: () {
-                                Navigator.pushReplacementNamed(
-                                    context, '/forgotPassword');
-                              },
+                            onTap: () {
+                              Navigator.pushReplacementNamed(
+                                  context, '/forgotPassword');
+                            },
                             child: Text(
                               "Forgot Password?",
                               style: TextStyle(

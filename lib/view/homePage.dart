@@ -194,43 +194,37 @@ class _homePageState extends State<homePage> {
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
-
           Container(
             decoration: BoxDecoration(
-              color:  Color.fromRGBO(143, 148, 251, 1),
-             // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))
+              color: Color.fromRGBO(143, 148, 251, 1),
+              // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))
             ),
-
             height: DeviceSize.getHeight(context) * 0.15,
-            width:DeviceSize.getWidth(context) ,
-            child:
-           
-                Center(
-                  child: DefaultTextStyle(
-                    textAlign: TextAlign.center,
-                    style: TextStyle1(
-                        color: Colors.white, fontWeight: FontWeight.bold, size: 15),
-                    child: AnimatedTextKit(
-                      isRepeatingAnimation: true,
-                      repeatForever: true,
-                      animatedTexts: [
-                        TypewriterAnimatedText(
-                          'Build your resume',
-                          speed: Duration(milliseconds: 200),
-                        ),
-                        TypewriterAnimatedText('make your future',
-                            speed: Duration(milliseconds: 200)),
-                      ],
-                      onTap: () {
-                        print("Tap Event");
-                      },
+            width: DeviceSize.getWidth(context),
+            child: Center(
+              child: DefaultTextStyle(
+                textAlign: TextAlign.center,
+                style: TextStyle1(
+                    color: Colors.white, fontWeight: FontWeight.bold, size: 15),
+                child: AnimatedTextKit(
+                  isRepeatingAnimation: true,
+                  repeatForever: true,
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      'Build your resume',
+                      speed: Duration(milliseconds: 200),
                     ),
-                  ),
+                    TypewriterAnimatedText('make your future',
+                        speed: Duration(milliseconds: 200)),
+                  ],
+                  onTap: () {
+                    print("Tap Event");
+                  },
                 ),
-           
+              ),
             ),
-        
-        
+          ),
+
           //  Row(
           // mainAxisAlignment: MainAxisAlignment.center,
           // children: [
@@ -269,61 +263,58 @@ class _homePageState extends State<homePage> {
           //   padding: EdgeInsets.all(20),
           //   child: frostedGlassEffectDemo(context)
           //   ),
-      
-        Container(
-              
-             margin: EdgeInsets.only(top: 85),
+
+          Container(
+            margin: EdgeInsets.only(top: 85),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+              color: Colors.white,
+            ),
+            child: Container(
+              margin: EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(25) , topRight: Radius.circular(25)),
-                 color: Colors.white,
-                 
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25)),
+                //   color: Colors.white,
               ),
-              child: Container(
-               margin: EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(25) , topRight: Radius.circular(25)),
-              //   color: Colors.white,
-                 
-              ),
-                child: ListView.builder(
-                  padding: EdgeInsets.only(top: 5),
-                 
-                    
-                  itemCount: 7,
-                  controller: scrollController,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return FadeAnimation(
-                        0.2,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 10),
-                          child: ResumeTile(
-                            index: index,
-                            showCaseKey: _two,
-                            resume: Resumes.first,
-                            showCaseDetail: true,
-                          ),
+              child: ListView.builder(
+                padding: EdgeInsets.only(top: 5),
+                itemCount: 7,
+                controller: scrollController,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return FadeAnimation(
+                      0.2,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 10),
+                        child: ResumeTile(
+                          index: index,
+                          showCaseKey: _two,
+                          resume: Resumes.first,
+                          showCaseDetail: true,
                         ),
-                      );
-                    }
-                    return Padding(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-                      child: FadeAnimation(
-                          0.2,
-                          ResumeTile(
-                            index: index,
-                            showCaseKey: _two,
-                            resume: Resumes[index % Resumes.length],
-                          )),
+                      ),
                     );
-                  },
-                ),
+                  }
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                    child: FadeAnimation(
+                        0.2,
+                        ResumeTile(
+                          index: index,
+                          showCaseKey: _two,
+                          resume: Resumes[index % Resumes.length],
+                        )),
+                  );
+                },
               ),
             ),
-         
+          ),
         ],
       ),
       // ),
@@ -354,7 +345,7 @@ class _homePageState extends State<homePage> {
                               speed: Duration(milliseconds: 200)),
                         ],
                         onTap: () {
-                          Navigator.pushNamed(context ,'/categoryPage');
+                          Navigator.pushNamed(context, '/categoryPage');
                           print("Tap Event");
                         },
                       ),
@@ -366,7 +357,7 @@ class _homePageState extends State<homePage> {
                 color: Colors.purple[100]!,
                 //key: UniqueKey(),
                 onTap: () {
-                   Navigator.pushNamed(context ,'/categoryPage');
+                  Navigator.pushNamed(context, '/categoryPage');
                 },
                 iconType: IconType.continueAnimation,
                 height: 20,
