@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
@@ -18,7 +19,36 @@ class _showDetailOfResumeState extends State<showDetailOfResume> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(143, 148, 251, 1),
         centerTitle: true,
-        title: Text("Show Resume detail"),
+        title: DefaultTextStyle(
+          style: TextStyle1(
+            color: Colors.white,
+            size: 18,
+          ),
+          child: AnimatedTextKit(
+            animatedTexts: [
+              ColorizeAnimatedText(
+                "Resume Detail",
+                colors: [
+                  Colors.white,
+                  Color.fromRGBO(143, 148, 251, 1),
+                  Color.fromRGBO(121, 127, 241, 1),
+                ],
+                speed: Duration(milliseconds: 350),
+                textStyle: TextStyle1(
+                  // color: Colors.white,
+                  size: 18,
+                ),
+              ),
+              // WavyAnimatedText('Look at the waves'),
+            ],
+            repeatForever: true,
+            isRepeatingAnimation: true,
+            onTap: () {
+              print("Tap Event");
+            },
+          ),
+        ),
+        // Text("Show Resume detail"),
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
@@ -95,26 +125,23 @@ class _showDetailOfResumeState extends State<showDetailOfResume> {
             ),
           ),
         ),
-       SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-           IconButton(
-            onPressed: (){
-
-            }, 
-            icon: Icon(Icons.share),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.share),
             ),
-                    IconButton(
-            onPressed: (){
-
-            }, 
-            icon: Icon(Icons.edit),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.edit),
             )
           ],
         )
-      ]
-      ),
+      ]),
     );
   }
 }

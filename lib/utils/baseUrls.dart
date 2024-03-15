@@ -1,5 +1,5 @@
 class BaseUrl{
-   static String? base_url = 'http://172.20.10.4:49157';
+   static String? base_url = 'https://resumebuilder.liara.run';
 
 
 }

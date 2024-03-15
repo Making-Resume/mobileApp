@@ -13,7 +13,7 @@ import '../utils/loginPageAnimation.dart';
 class PinCodeVerificationScreen extends StatefulWidget {
   const PinCodeVerificationScreen({
     Key? key,
-    this.email = "MohsenKashefi2016@yahoo.com",
+    this.email,
   }) : super(key: key);
 
   final String? email;
@@ -61,31 +61,30 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
     );
   }
 
-  triggerButton({String? email, int? verifying_code}) async {
+  triggerButton({int? verifying_code}) async {
     setState(() {
       _isLoading = true;
       width = 50;
     });
     await Future.delayed(Duration(seconds: 4));
     await veriying
-        .sendCode(email: email!, verification_code: verifying_code!)!
+        .sendCode(email: widget.email!, verification_code: verifying_code!)!
         .then(
       (value) {
         if (value is verification) {
-          if(value.code == 200){
-Navigator.pushNamed(context, '/registrationPage');
-          }else{
-                      showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return RoundedAlertDialog(
-                title: 'Error',
-                message: value.message,
-              );
-            },
-          );
+          if (value.code == 200) {
+            Navigator.pushNamed(context, '/registrationPage' );
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return RoundedAlertDialog(
+                  title: 'Error',
+                  message: value.message,
+                );
+              },
+            );
           }
-          
         } else if (value is ApiError) {
           showDialog(
             context: context,
@@ -297,9 +296,7 @@ Navigator.pushNamed(context, '/registrationPage');
                   title: 'Verify',
                   onTap: () async {
                     if (formKey.currentState!.validate()) {
-                      await triggerButton(
-                          email: 'ayobkafrashian@gmail.com',
-                          verifying_code: current_code);
+                      await triggerButton(verifying_code: current_code);
                     }
                   },
                 ),

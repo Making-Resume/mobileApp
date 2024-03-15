@@ -31,33 +31,26 @@ class ResumeTile extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            child: Stack(
-              children: [
+            child: Stack(children: [
               BackdropFilter(
-              
-                filter: ImageFilter.blur(
-                  sigmaX: 2,
-                  sigmaY: 2,
-                
-                ),
-                child: Container(
-                  height: DeviceSize.getHeight(context) * 0.3,
-                  width: DeviceSize.getHeight(context) * 0.6,
-            
-                )
-              ),
+                  filter: ImageFilter.blur(
+                    sigmaX: 2,
+                    sigmaY: 2,
+                  ),
+                  child: Container(
+                    height: DeviceSize.getHeight(context) * 0.3,
+                    width: DeviceSize.getHeight(context) * 0.6,
+                  )),
               Container(
                 height: DeviceSize.getHeight(context) * 0.3,
                 width: DeviceSize.getHeight(context) * 0.6,
                 decoration: BoxDecoration(
-                  
-                             image:DecorationImage(
-                              fit: BoxFit.fill,
-                              opacity: 0.4,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      opacity: 0.4,
                       image: NetworkImage(
                         'https://www.filepicker.io/api/file/4CcxWBfKQZOYlBlzOWU0',
-
-                        ),
+                      ),
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -90,50 +83,43 @@ class ResumeTile extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Flexible(
-                              child: showCaseDetail ?
-                              
-                              DefaultTextStyle(
-                                style: TextStyle1(
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                                child: AnimatedTextKit(
-                                
-                                  animatedTexts: [
-                                    ColorizeAnimatedText(
-                                      
-                                      resume.title! , colors: [
-                                      Colors.white,
-                                  
-                                      Color.fromRGBO(143, 148, 251, 1),
-                                      Color.fromRGBO(121, 127, 241, 1),
-                                    ],
-                                    speed: Duration(milliseconds: 350),
-                                    textStyle:  TextStyle1(
-                                 // color: Colors.white,
-                                  size: 18,
-                                ),
-                                    ),
-                                    // WavyAnimatedText('Look at the waves'),
-                                  ],
-                                  repeatForever: true,
-                                  isRepeatingAnimation: true,
-                                  onTap: () {
-                                    print("Tap Event");
-                                  },
-                                ),
-                              )
-                              :
-                              Text(
-                              resume.title!,
-
-                                 textAlign: TextAlign.left,
-                               overflow: TextOverflow.ellipsis,
-                                style: TextStyle1(
-                                    color: Colors.white,
-                                    size: 20,
-                                  )
-                              ),
+                              child: showCaseDetail
+                                  ? DefaultTextStyle(
+                                      style: TextStyle1(
+                                        color: Colors.white,
+                                        size: 18,
+                                      ),
+                                      child: AnimatedTextKit(
+                                        animatedTexts: [
+                                          ColorizeAnimatedText(
+                                            resume.title!,
+                                            colors: [
+                                              Colors.white,
+                                              Color.fromRGBO(143, 148, 251, 1),
+                                              Color.fromRGBO(121, 127, 241, 1),
+                                            ],
+                                            speed: Duration(milliseconds: 350),
+                                            textStyle: TextStyle1(
+                                              // color: Colors.white,
+                                              size: 18,
+                                            ),
+                                          ),
+                                          // WavyAnimatedText('Look at the waves'),
+                                        ],
+                                        repeatForever: true,
+                                        isRepeatingAnimation: true,
+                                        onTap: () {
+                                          print("Tap Event");
+                                        },
+                                      ),
+                                    )
+                                  : Text(resume.title!,
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle1(
+                                        color: Colors.white,
+                                        size: 20,
+                                      )),
                             ),
                             SizedBox(
                               height: 4,
@@ -181,7 +167,10 @@ class ResumeTile extends StatelessWidget {
                                             color: Color.fromRGBO(
                                                 143, 148, 251, 1),
                                             //key: UniqueKey(),
-                                            onTap: () {},
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                  context, "/showResumeDetail");
+                                            },
                                             iconType:
                                                 IconType.continueAnimation,
                                             height: 20,

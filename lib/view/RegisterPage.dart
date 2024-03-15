@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resumemaker/models/ApiError.dart';
 import 'package:resumemaker/utils/loginPageAnimation.dart';
+import 'package:resumemaker/view/codeVerification2.dart';
 import 'package:resumemaker/view/loginPage.dart';
 import 'package:resumemaker/view/widgets/custom_AlertDialog.dart';
 import 'package:resumemaker/view/widgets/custom_Button.dart';
@@ -31,21 +32,26 @@ class _RegisterState extends State<Register> {
     await user.Register(email: email!)!.then(
       (value) {
         if (value is User) {
-          if(value.code != 200){
-                      showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return RoundedAlertDialog(
-                title: 'Error',
-                message: value.message,
-              );
-            },
-          );
-          }else{
-             print(user);
-          Navigator.pushNamed(context, '/codeVerification2');
+          if (value.code != 200) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return RoundedAlertDialog(
+                  title: 'Error',
+                  message: value.message,
+                );
+              },
+            );
+          } else {
+            print(user);
+          Navigator.pushReplacementNamed(
+              context,
+              '/codeVerification2',
+              arguments: PinCodeVerificationScreen(
+                email: email,
+              ),
+            );
           }
-         
         } else if (value is ApiError) {
           showDialog(
             context: context,
@@ -75,7 +81,11 @@ class _RegisterState extends State<Register> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-             custom_header(path: 'assets/images/register2.json' , context: context , height: 500 , width: 500),
+              custom_header(
+                  path: 'assets/images/register2.json',
+                  context: context,
+                  height: 500,
+                  width: 500),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Form(
@@ -84,7 +94,7 @@ class _RegisterState extends State<Register> {
                     children: <Widget>[
                       FadeAnimation(
                           1.8,
-                      Container(
+                          Container(
                             padding: EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 color: Colors.white,
@@ -103,14 +113,14 @@ class _RegisterState extends State<Register> {
                                   child: customTextFormfield(
                                       controller: emailController,
                                       hintText: "Email",
+
                                       /// label: 'Family',
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
                                           return 'Please enter your email';
                                         }
                                         return null;
-                                      }
-                                      ),
+                                      }),
                                 ),
                               ],
                             ),
@@ -120,29 +130,28 @@ class _RegisterState extends State<Register> {
                       ),
                       FadeAnimation(
                         2,
-                         custom_Button(
-                                  width: width,
-                                  height: height,
-                                  title: 'Register',
-                                  onTap: () async {
-                              if (_formKey.currentState!.validate()) {
-                                await triggerButton(
-                                    email: emailController.text,
-                                   );
-                              }
-                            },
-                                        ),
-
-
+                        custom_Button(
+                          width: width,
+                          height: height,
+                          title: 'Register',
+                          onTap: () async {
+                            if (_formKey.currentState!.validate()) {
+                              await triggerButton(
+                                email: emailController.text,
+                              );
+                            }
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 30,
                       ),
                       FadeAnimation(
                           1.5,
-                      InkWell(
+                          InkWell(
                               onTap: () {
-                                  Navigator.pushReplacementNamed(context, '/loginPage');
+                                Navigator.pushReplacementNamed(
+                                    context, '/loginPage');
                               },
                               child: Text(
                                 "Login",
