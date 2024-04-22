@@ -9,6 +9,7 @@ import 'package:resumemaker/utils/const/size.dart';
 import 'package:resumemaker/view/widgets/avatarOfResumesItem.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../../models/categoryModel.dart';
 import '../../models/singleResume.dart';
 import '../../utils/const/textStyle.dart';
 
@@ -22,7 +23,7 @@ class CategoryItem extends StatelessWidget {
   //final bool showCaseDetail;
   final int? index;
   GlobalKey? showCaseKey = GlobalKey();
-  final Category_Item category_item;
+  final Category_Model? category_item;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class CategoryItem extends StatelessWidget {
                       fit: BoxFit.fill,
                       opacity: 0.4,
                       image: NetworkImage(
-                        category_item.imagePath!,
+                        category_item!.image!,
                       ),
                     ),
                     boxShadow: [
@@ -70,7 +71,7 @@ class CategoryItem extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(10)),
                 child: Center(
-                  child: Text(category_item.text!,
+                  child: Text(category_item!.title!,
                       textAlign: TextAlign.left,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle1(

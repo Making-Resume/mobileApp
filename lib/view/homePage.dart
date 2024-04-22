@@ -4,16 +4,22 @@ import 'dart:ui';
 import 'package:animated_icon/animated_icon.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:resumemaker/models/singleResume.dart';
 import 'package:resumemaker/utils/const/textStyle.dart';
 import 'package:resumemaker/utils/helper/homePageHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:resumemaker/utils/homePageNetwork.dart';
 import 'package:resumemaker/utils/loginPageAnimation.dart';
+import 'package:resumemaker/view/categoryPage.dart';
+import 'package:resumemaker/view/widgets/custom_AlertDialog.dart';
 import 'package:resumemaker/view/widgets/listDetail.dart';
 import 'package:resumemaker/view/widgets/resume_item.dart';
 import 'package:showcaseview/showcaseview.dart';
 
+import '../models/ApiError.dart';
+import '../models/categoryModel.dart';
 import '../utils/const/size.dart';
 
 class home_page extends StatelessWidget {
@@ -146,6 +152,30 @@ class _homePageState extends State<homePage> {
     ];
   }
 
+
+ get_categoryFunction() async {
+
+    //await Future.delayed(Duration(seconds: 4));
+    await HomePage_Network.getCategories()!.then(
+      (value) {
+        if (value is List<Category_Model>) {
+        //  Navigator.pushNamed(context, '/categoryPage' , arguments: value);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(categories: value,)  ));
+        } else if (value is ApiError) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return RoundedAlertDialog(
+                title: 'Error',
+                message: value.message,
+              );
+            },
+          );
+        }
+      },
+    );
+
+  }
   @override
   void dispose() {
     scrollController.dispose();
@@ -344,8 +374,9 @@ class _homePageState extends State<homePage> {
                           TyperAnimatedText('create',
                               speed: Duration(milliseconds: 200)),
                         ],
-                        onTap: () {
-                          Navigator.pushNamed(context, '/categoryPage');
+                        onTap: () async{
+                          await get_categoryFunction();
+                          //Navigator.pushNamed(context, '/categoryPage');
                           print("Tap Event");
                         },
                       ),

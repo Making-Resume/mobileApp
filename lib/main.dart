@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
 
         initialRoute: '/homePage',
         routes: {
-        //  '/': (context) => splash_screen(),
+          //  '/': (context) => splash_screen(),
           '/loginPage': (context) => Login(),
           '/registerPage': (context) => Register(),
           '/codeVerification': (context) => codeVerification(),
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           // '/codeVerification2': (context) => PinCodeVerificationScreen(),
           '/forgotPassword': (context) => forgotPassword(),
           '/homePage': (context) => home_page(),
-          '/categoryPage': (context) => CategoryPage(),
+          // '/categoryPage': (context) => CategoryPage(),
           '/template_type': (context) => Template_Type(),
           '/completingForm': (context) => UserForm(),
           '/signInWithlinkedIN': (context) => signInWithLinkedIn(),
@@ -109,6 +109,23 @@ class MyApp extends StatelessWidget {
               },
             );
           }
+
+          // if (settings.name == "/categoryPage") {
+          //   // Cast the arguments to the correct
+          //   // type: ScreenArguments.
+          //   final args = settings.arguments as CategoryPage;
+
+          //   // Then, extract the required data from
+          //   // the arguments and pass the data to the
+          //   // correct screen.
+          //   return MaterialPageRoute(
+          //     builder: (context) {
+          //       return CategoryPage(
+          //           categories: args.categories,
+          //       );
+          //     },
+          //   );
+          // }
         });
   }
 }

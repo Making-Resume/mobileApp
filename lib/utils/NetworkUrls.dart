@@ -1,7 +1,5 @@
-class api_urls{
-   static String get_Category = "api/Category/GetCategory";
-
-
+class Network_urls{
+   static String get_Category = "/api/Category/GetCategory";
 
 
 }
