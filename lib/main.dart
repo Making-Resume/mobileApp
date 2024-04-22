@@ -37,13 +37,13 @@ class MyApp extends StatelessWidget {
         ),
         //home: Login(),
 
-        initialRoute: '/',
+        initialRoute: '/homePage',
         routes: {
-          '/': (context) => splash_screen(),
+        //  '/': (context) => splash_screen(),
           '/loginPage': (context) => Login(),
           '/registerPage': (context) => Register(),
           '/codeVerification': (context) => codeVerification(),
-          '/registrationPage': (context) => RegistrationPage(),
+          // '/registrationPage': (context) => RegistrationPage(),
           // '/codeVerification2': (context) => PinCodeVerificationScreen(),
           '/forgotPassword': (context) => forgotPassword(),
           '/homePage': (context) => home_page(),
@@ -88,12 +88,27 @@ class MyApp extends StatelessWidget {
               builder: (context) {
                 return PinCodeVerificationScreen(
                   email: args.email,
-                 
                 );
               },
             );
           }
-        }
-        );
+
+          if (settings.name == "/registrationPage") {
+            // Cast the arguments to the correct
+            // type: ScreenArguments.
+            final args = settings.arguments as RegistrationPage;
+
+            // Then, extract the required data from
+            // the arguments and pass the data to the
+            // correct screen.
+            return MaterialPageRoute(
+              builder: (context) {
+                return PinCodeVerificationScreen(
+                  email: args.email,
+                );
+              },
+            );
+          }
+        });
   }
 }

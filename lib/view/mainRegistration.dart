@@ -12,6 +12,11 @@ import '../bloc/registrationPage/registrationPage_bloc.dart';
 import '../bloc/registrationPage/registrationPage_event.dart';
 
 class RegistrationPage extends StatelessWidget {
+  RegistrationPage({
+    this.email,
+  });
+
+  String? email;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +59,10 @@ class RegistrationForm extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 custom_header(
-                    path: 'assets/images/register.json', context: context , height: 400 , width: 400),
+                    path: 'assets/images/register.json',
+                    context: context,
+                    height: 400,
+                    width: 400),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   child: Form(
